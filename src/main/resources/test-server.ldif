@@ -54,6 +54,26 @@ sn: Hamilton
 uid: bob
 userPassword: bobspassword
 
+dn: uid=mert,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Mert Ozturk
+sn: Ozturk
+uid: mert
+userPassword: mertspassword
+
+dn: uid=emre,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Emre Ozturk
+sn: Ozturk
+uid: emre
+userPassword: 123456
+
 dn: uid=joe,ou=otherpeople,dc=springframework,dc=org
 objectclass: top
 objectclass: person
@@ -113,6 +133,8 @@ cn: developers
 ou: developer
 uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
 uniqueMember: uid=bob,ou=people,dc=springframework,dc=org
+uniqueMember: uid=mert,ou=people,dc=springframework,dc=org
+uniqueMember: uid=emre,ou=people,dc=springframework,dc=org
 
 dn: cn=managers,ou=groups,dc=springframework,dc=org
 objectclass: top

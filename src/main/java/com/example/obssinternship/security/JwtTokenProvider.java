@@ -3,7 +3,9 @@ package com.example.obssinternship.security;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsImpl;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,7 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
+
 
     @Value("${app.jwtSecret}")
     private String jwtSecret;

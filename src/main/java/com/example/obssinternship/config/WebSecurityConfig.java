@@ -1,16 +1,19 @@
 package com.example.obssinternship.config;
-
+/*
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.LdapShaPasswordEncoder;
 import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
+
+import com.example.obssinternship.security.JwtAuthenticationEntryPoint;
 
 import java.util.Arrays;
 
@@ -21,6 +24,15 @@ import java.util.Arrays;
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private JwtAuthenticationEntryPoint unauthorizedHandler;
+
+
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -43,12 +55,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf()
+                .disable()
+                .cors()
+                .disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler)
+                .and()
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/css/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and().formLogin().permitAll()
-                .and().logout().logoutSuccessUrl("/");
+                .antMatchers("/api/auth/**").permitAll()
+                .anyRequest().authenticated();
     }
-}
+}*/
