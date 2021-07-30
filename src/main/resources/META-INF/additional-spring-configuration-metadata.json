@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "spring.ldap.embedded.url",
+      "type": "java.lang.String",
+      "description": "Description for spring.ldap.embedded.url."
+    },
+    {
+      "name": "example.obssinternship.jwtSecret",
+      "type": "java.lang.String",
+      "description": "Description for example.obssinternship.jwtSecret."
+    },
+    {
+      "name": "example.obssinternship.jwtSecret",
+      "type": "java.lang.String",
+      "description": "Description for example.obssinternship.jwtSecret."
+    }
+  ] }
