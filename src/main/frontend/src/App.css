@@ -1,0 +1,102 @@
+.navbar-icon {
+  margin-right: 10px;
+  margin-bottom: 3px;
+}
+.container {
+  text-align: center;
+  position: center;
+  min-width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+.navbar-brand {
+  margin-left: 15px;
+  font-family: Consolas;
+}
+nav{
+  margin-left: 1420px;
+  margin-right: -10px;
+  color: purple;
+  background-color: aquamarine;
+}
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+.card-container.card {
+  max-width: 350px !important;
+  padding: 40px 40px;
+  color: white;
+}
+
+option {
+  background: #ffffff;
+  color: green;
+}
+
+select option:checked,
+select option:focus {
+  background: linear-gradient(green, green);
+  -webkit-text-fill-color: #ffffff;
+  color: #ffffff;
+}
+
+.card {
+  background-color: bisque;
+  padding: 20px 25px 30px;
+  margin: 0 auto 25px;
+  margin-top: 50px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  opacity: 0.8;
+}
+
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.panel-container {
+  background-color: #02134C;
+  margin: 50px auto 25px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  opacity: 0.8;
+  max-width: 2000px;
+  padding: 40px;
+  color: white;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+.input {
+  text-align: center;
+  margin-top: 20px;
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  border-radius : 20px;
+  margin-bottom: 20px;
+}
