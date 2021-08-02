@@ -23,7 +23,6 @@ class App extends Component {
 
     componentDidMount() {
         const user = AuthService.getCurrentUser();
-
         if (user) {
             this.setState({
                 currentUser: user,
@@ -43,17 +42,7 @@ class App extends Component {
 
         return (
             <div className="container">
-                <nav className="navbar navbar-expand navbar-dark" style={{paddingBottom:-3}}>
-                    <div className="navbar-nav mr-auto">
-                        {showAdminBoard && (<li className="nav-item">
-                                <Link to={"/admin"} className="nav-link" style={{color:"black"}}>
-                                    Admin Panel
-                                </Link>
-                            </li>
-                        )}
-
-
-                    </div>
+                {/*<nav className="navbar navbar-expand navbar-dark" style={{paddingBottom:-3}}>
                     {currentUser ? (
                         <div className="navbar-nav ml-auto">
                             <Dropdown>
@@ -61,8 +50,8 @@ class App extends Component {
                                     {currentUser.username}
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item href="/home" onClick={this.logOut} style={{color:"#004FB1"}}>
-                                        LOGOUT <IoLogOutOutline size={18} style={{marginBottom:3,marginRight:5}}/>
+                                    <Dropdown.Item href="/login" onClick={this.logOut} style={{color:"#004FB1"}}>
+                                        Çıkış Yap <IoLogOutOutline size={18} style={{marginBottom:3,marginRight:5}}/>
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
@@ -76,13 +65,12 @@ class App extends Component {
                             </li>
                         </div>
                     )}
-                </nav>
+                </nav>*/}
 
                 <div style={{marginTop:40,marginLeft:20,marginRight:20,color:"black"}}>
                     <Switch>
-
-                        <Route exact path={["/", "/dashboard"]} component={Dashboard} />
-                        <Route exact path="/login" component={LoginPage} />
+                        <Route exact path="/dashboard" component={Dashboard} />
+                        <Route exact path={["/","/login"]} component={LoginPage} />
                     </Switch>
                 </div>
             </div>

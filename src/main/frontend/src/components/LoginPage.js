@@ -4,6 +4,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
 import AuthService from "../services/AuthService";
+import Header from "./Header";
 
 const required = value => {
     if (!value) {
@@ -83,6 +84,7 @@ export default class Login extends Component {
     render() {
         return (
             <div className="col-md-12">
+                <Header title = "Mentorluk Uygulamasına Hoşgeldiniz!"/>
                 <div className="card card-container">
                     <img
                         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"

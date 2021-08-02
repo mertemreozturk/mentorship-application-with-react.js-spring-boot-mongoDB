@@ -15,10 +15,9 @@
   font-family: Consolas;
 }
 nav{
-  margin-left: 1420px;
+  margin-left: -15px;
   margin-right: -10px;
   color: purple;
-  background-color: aquamarine;
 }
 label {
   display: block;
