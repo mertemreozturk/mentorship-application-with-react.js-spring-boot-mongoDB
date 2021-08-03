@@ -5,7 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import HelpIcon from '@material-ui/icons/Help';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import ThumbUp from '@material-ui/icons/ThumbUp';
@@ -14,7 +13,6 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Box from '@material-ui/core/Box';
 import Applies from "./Applies";
 import AddNewTopic from "./AddNewTopic";
-import Header from "./Header";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;

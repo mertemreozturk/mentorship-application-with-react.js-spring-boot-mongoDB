@@ -30,6 +30,10 @@ label {
   color: white;
 }
 
+.input-form{
+  border-radius: 20px;
+  width: 300px;
+}
 option {
   background: #ffffff;
   color: green;
