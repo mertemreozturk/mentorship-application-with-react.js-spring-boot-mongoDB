@@ -1,4 +1,24 @@
 package com.example.obssinternship.controller;
+
+import com.example.obssinternship.model.User;
+import com.example.obssinternship.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+@RequestMapping("/api/user")
+public class UserController{
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @PostMapping("/addUser")
+    public void addUser(@RequestBody User user){
+        userRepository.save(user);
+    }
+}
 /*
 import com.example.obssinternship.payload.request.LoginRequest;
 import org.springframework.http.ResponseEntity;

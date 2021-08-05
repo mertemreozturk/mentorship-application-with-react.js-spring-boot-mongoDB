@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -22,8 +23,17 @@ public class TopicController {
         return ResponseEntity.ok("okey");
     }
 
-    @GetMapping("getAllTopics")
-    public ResponseEntity<List<Topic>> getAllTopics(){
-        return ResponseEntity.ok(topicRepository.findAll());
+    @GetMapping("/getAllTopics")
+    public ResponseEntity<List<String>> getAllTopics(){
+        List<String> topics = new ArrayList<>();
+        for(Topic t:topicRepository.findAll()){
+            topics.add(t.getDescription());
+        }
+        return ResponseEntity.ok(topics);
+    }
+
+    @PostMapping("/getSubtopics")
+    public ResponseEntity<List<String>> getSubtopics(@RequestBody Topic topic){
+        return ResponseEntity.ok(topicRepository.findByDescription(topic.getDescription()).getSubtopics());
     }
 }

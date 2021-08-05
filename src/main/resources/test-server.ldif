@@ -62,7 +62,7 @@ objectclass: inetOrgPerson
 cn: Mert Ozturk
 sn: Ozturk
 uid: mert
-userPassword: mertspassword
+userPassword: 123456
 
 dn: uid=emre,ou=people,dc=springframework,dc=org
 objectclass: top
@@ -72,6 +72,26 @@ objectclass: inetOrgPerson
 cn: Emre Ozturk
 sn: Ozturk
 uid: emre
+userPassword: 123456
+
+dn: uid=ayse,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Ayse Ozturk
+sn: Ozturk
+uid: ayse
+userPassword: 123456
+
+dn: uid=admin,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Admin Manager
+sn: Manager
+uid: admin
 userPassword: 123456
 
 dn: uid=joe,ou=otherpeople,dc=springframework,dc=org
@@ -135,6 +155,8 @@ uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
 uniqueMember: uid=bob,ou=people,dc=springframework,dc=org
 uniqueMember: uid=mert,ou=people,dc=springframework,dc=org
 uniqueMember: uid=emre,ou=people,dc=springframework,dc=org
+uniqueMember: uid=ayse,ou=people,dc=springframework,dc=org
+uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
 
 dn: cn=managers,ou=groups,dc=springframework,dc=org
 objectclass: top
@@ -142,6 +164,7 @@ objectclass: groupOfUniqueNames
 cn: managers
 ou: manager
 uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
+uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
 uniqueMember: cn=mouse\, jerry,ou=people,dc=springframework,dc=org
 
 dn: cn=submanagers,ou=subgroups,ou=groups,dc=springframework,dc=org

@@ -13,6 +13,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import MakeApplication from './MakeApplication'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -93,7 +94,7 @@ const UserPanel =() => {
                 mentor ara
             </TabPanel>
             <TabPanel value={value} index={3}>
-                başvuru yap
+                <MakeApplication/>
             </TabPanel>
             <TabPanel value={value} index={4}>
                 Item Four

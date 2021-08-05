@@ -9,6 +9,17 @@ class TopicService{
                 subtopics: sub
             });
     }
+
+    getAllTopics(){
+        return axios
+            .get(API_URL+"/getAllTopics");
+    }
+
+    getSubTopics(main){
+        return axios.post(API_URL+"/getSubtopics",{
+            description: main
+        })
+    }
 }
 
-export default new TopicService;
+export default new TopicService();
