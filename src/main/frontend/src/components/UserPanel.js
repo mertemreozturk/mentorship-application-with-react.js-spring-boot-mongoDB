@@ -14,6 +14,7 @@ import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import MakeApplication from './MakeApplication'
+import SearchMentor from "./SearchMentor";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -91,7 +92,7 @@ const UserPanel =() => {
                 Item Two
             </TabPanel>
             <TabPanel value={value} index={2}>
-                mentor ara
+                <SearchMentor/>
             </TabPanel>
             <TabPanel value={value} index={3}>
                 <MakeApplication/>

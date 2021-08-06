@@ -6,6 +6,9 @@ import com.example.obssinternship.model.User;
 import com.example.obssinternship.repository.MentorRepository;
 import com.example.obssinternship.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +25,9 @@ public class MentorController {
 
     @Autowired
     private MentorRepository mentorRepository;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
 
     @PostMapping("/addMentor")
@@ -49,5 +55,20 @@ public class MentorController {
         Mentor mentor = mentorRepository.findById(id).get();
         mentorRepository.delete(mentor);
         return ResponseEntity.ok("deleted");
+    }
+
+    @GetMapping("/searchMentor/{textQuery}")
+    public ResponseEntity<?> searchMentor(@PathVariable String textQuery){
+        /*TextCriteria criteria = TextCriteria
+                .forDefaultLanguage()
+                .matching(searchPhrase);
+
+        TextQuery query = TextQuery.queryText(criteria);
+
+        List<Mentor> mentors = mongoTemplate.find(query, Mentor.class);*/
+
+        /*TextQuery query = TextQuery.queryText(new TextCriteria().matchingAny(textQuery)).sortByScore();
+        List<Mentor> result = mongoTemplate.find(query, Mentor.class, "mentor");*/
+        return ResponseEntity.ok(mentorRepository.findMentorByRegexpAbout(textQuery));
     }
 }

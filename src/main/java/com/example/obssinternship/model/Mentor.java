@@ -1,5 +1,7 @@
 package com.example.obssinternship.model;
 
+import org.springframework.data.mongodb.core.index.TextIndexDefinition;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -9,7 +11,8 @@ public class Mentor extends Mentorship{
     private List<Mentee> mentees;
     private boolean isAccepted;
     private int howManyPhases;
-
+    @TextIndexed
+    private String about;
 
     public List<Mentee> getMentees() {
         return mentees;
@@ -33,5 +36,13 @@ public class Mentor extends Mentorship{
 
     public void setHowManyPhases(int howManyPhases) {
         this.howManyPhases = howManyPhases;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 }
