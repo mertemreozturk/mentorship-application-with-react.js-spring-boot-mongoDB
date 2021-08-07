@@ -17,7 +17,7 @@ class MentorService {
 
     findMentor(text) {
         return axios
-            .get(API_URL+"searcMentor/"+text);
+            .get(API_URL+"/searchMentor/"+text);
     }
 }
 

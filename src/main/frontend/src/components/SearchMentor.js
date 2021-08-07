@@ -1,41 +1,77 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import MentorService from "../services/MentorService";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+        },
+        textfield:{
+            width: '100%',
+        }
+
+    },
+}));
+
 
 const SearchMentor = () => {
-
+    const classes = useStyles();
     const [mentors, setMentors] = useState([])
+    const [search, setSearch] = useState("");
 
-    const getDataFromAPI = () => {
-        console.log("Options Fetched from API")
-
-        MentorService.findMentor().then((res) => {
-            console.log(res.data)
+    const handleSearchChange = (event) => {
+        setSearch(event.target.value)
+        console.log(search);
+        /*setMentors([])
+        MentorService.findMentor(search).then((res) => {
+            let arr = [];
             for (let i = 0; i < res.data.length; i++) {
-                mentors.push(res.data[i].username)
+                arr.push(res.data[i])
             }
-            setMentors(mentors)
-        })
+            setMentors(arr)
+        })*/
+        console.log(mentors)
     }
 
+    useEffect(() => {
+        console.log(search);
+        setMentors([])
+        MentorService.findMentor(search).then((res) => {
+            let arr = [];
+            for (let i = 0; i < res.data.length; i++) {
+                arr.push(res.data[i])
+            }
+            setMentors(arr)
+        })
+    }, [ search]);
+
+
     return (
-        <div style={{ marginLeft: '40%', marginTop: '60px' }}>
-            <h3>Greetings from GeeksforGeeks!</h3>
-            <Autocomplete
-                style={{ width: 500 }}
-                freeSolo
-                autoComplete
-                autoHighlight
-                options={mentors}
-                renderInput={(params) => (
-                    <TextField {...params}
-                               onChange={getDataFromAPI}
-                               variant="outlined"
-                               label="Search Box"
-                    />
-                )}
+
+        <div style={{ marginTop: '60px' }}>
+            <TextField
+                    inputProps={{min: 0, style: { textAlign: 'center' }}}
+                    id="outlined-basic"
+                    label="mentor ara"
+                    variant="outlined"
+                    type="search"
+                    value={ search }
+                    onChange={handleSearchChange}
             />
+
+            <tbody>
+            {
+                mentors.map(
+                    mentor =>
+                        <h3>{mentor.username}</h3>
+                )
+            }
+            </tbody>
         </div>
     );
 }
