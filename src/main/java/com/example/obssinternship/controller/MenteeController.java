@@ -61,4 +61,9 @@ public class MenteeController {
 
         return ResponseEntity.ok(mentee);
     }
+
+    @PostMapping("/getMentors")
+    public ResponseEntity<?> getMentors(@RequestBody User user){
+        return ResponseEntity.ok(menteeRepository.findByUsername(user.getUsername()));
+    }
 }

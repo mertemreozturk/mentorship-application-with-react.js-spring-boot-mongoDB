@@ -46,7 +46,13 @@ public class MentorController {
         List<Mentor>  mentors = mentorRepository.findByUsername(user.getUsername());
         List<Mentee> mentees = new ArrayList<>();
 
-        return ResponseEntity.ok(mentorRepository.findByUsername(user.getUsername()));
+        for(Mentor m: mentors){
+            if ( m.getMentees() != null){
+                mentees.addAll(m.getMentees());
+            }
+        }
+
+        return ResponseEntity.ok(mentees);
     }
 
     @GetMapping("/allApplies")

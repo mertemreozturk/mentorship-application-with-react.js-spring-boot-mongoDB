@@ -8,4 +8,6 @@ import java.util.List;
 public interface MenteeRepository extends MongoRepository<Mentee, String> {
 
     Mentee findByUserIdAndTopic(String userId, String topic);
+
+    List<Mentee> findByUsername(String username);
 }

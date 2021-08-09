@@ -15,9 +15,9 @@ class MentorService {
             });
     }
 
-    getMentors(name) {
+    getMentees(name) {
         return axios
-            .post(API_URL + "/getMentors/", {
+            .post(API_URL + "/getMentees/", {
                 username: name
             });
     }

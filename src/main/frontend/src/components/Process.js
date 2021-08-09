@@ -31,7 +31,7 @@ const Process = () => {
         //<MentorshipTable title={"menteelik"} where= "process" desc = {"Mentor Adı"} user={userInfo}/>
         <div>
             <MentorshipTable title={"mentorluk"} desc = "Mentee Adı" user={userInfo} who={"mentor"}/>
-            <MentorshipTable title={"menteelik"} where= "process" desc = {"Mentor Adı"} user={userInfo}/>
+            <MentorshipTable title={"menteelik"} desc = {"Mentor Adı"} user={userInfo}/>
         </div>
     );
 };

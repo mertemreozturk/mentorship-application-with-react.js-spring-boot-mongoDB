@@ -13,6 +13,7 @@ import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import MentorService from "../services/MentorService";
 import AuthService from "../services/AuthService";
+import MenteeService from "../services/MenteeService";
 
 const MentorshipTable = ({title, desc, user, who}) => {
 
@@ -53,12 +54,15 @@ const MentorshipTable = ({title, desc, user, who}) => {
 
     useEffect(() => {
         console.log("sorun?")
-        MentorService.getMentors(currentUser.username).then(
-            (res) => {setMentors(res.data)
+        MentorService.getMentees(currentUser.username).then(
+            (res) => {setMentees(res.data)
                 console.log(res.data)}
         );
+        console.log(mentees);
+        MenteeService.getMentors(currentUser.username).then(
+            (res) => {setMentors(res.data)}
+        );
         console.log(mentors);
-
     }, [user]);
 
 
@@ -132,8 +136,8 @@ const MentorshipTable = ({title, desc, user, who}) => {
         <div>
             <div className="card">
                 <h5>{title}</h5>
-                <DataTable value={who === "mentor" ? mentors : mentees} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1}>
-                    <Column field="username" header={desc}></Column>
+                <DataTable value={who === "mentor" ? mentees : mentors} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1}>
+                    <Column field={ who === "mentor" ? "username" : "mentorName"} header={desc}></Column>
                     <Column field= "topic" header="Konu"></Column>
                     <Column field="company" header="Durum"></Column>
                     <Column field="id" header="Detay"></Column>
