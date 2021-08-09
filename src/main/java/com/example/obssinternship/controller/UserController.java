@@ -18,6 +18,11 @@ public class UserController{
     public void addUser(@RequestBody User user){
         userRepository.save(user);
     }
+
+    @PostMapping("/getUserInfo")
+    public ResponseEntity<?> getUserInfo(@RequestBody User user){
+        return ResponseEntity.ok(userRepository.findByUsername(user.getUsername()));
+    }
 }
 /*
 import com.example.obssinternship.payload.request.LoginRequest;

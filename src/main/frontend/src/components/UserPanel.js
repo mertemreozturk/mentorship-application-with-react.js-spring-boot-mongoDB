@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,6 +15,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import MakeApplication from './MakeApplication'
 import SearchMentor from "./SearchMentor";
+import Process from "./Process";
+import UserService from "../services/UserService";
+import AuthService from "../services/AuthService";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -60,6 +63,30 @@ const useStyles = makeStyles((theme) => ({
 const UserPanel =() => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
+    //const currentUser = AuthService.getCurrentUser();
+    //const [userInfo, setUserInfo] = useState('')
+
+    /*useEffect(  () =>{
+        await fetch("http://localhost:8080/api/user/getUserInfo",{username: currentUser.username})
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    setMainTopics(result);
+                },
+                (error) => {
+                    setError(error);
+                }
+            )
+        UserService.getUserInfo(currentUser.username).then(
+            (res) => {setUserInfo(res.data)}
+        );
+        console.log(userInfo)
+        MentorService.getMentors(userInfo.id).then(
+            (res) => {setMentors(res.data)}
+        );
+        console.log(mentors);
+    },[] )*/
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -86,7 +113,7 @@ const UserPanel =() => {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                süreçlerim
+                <Process/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Item Two

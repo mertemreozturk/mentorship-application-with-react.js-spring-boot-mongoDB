@@ -9,15 +9,40 @@ class MentorService {
             .post(API_URL + "/addMentor", {
                 username: name,
                 topic: topic,
-                subTopic: subTopic,
+                subtopics: subTopic,
                 howManyPhases: numberOfPhases,
                 about: about
+            });
+    }
+
+    getMentors(name) {
+        return axios
+            .post(API_URL + "/getMentors/", {
+                username: name
             });
     }
 
     findMentor(text) {
         return axios
             .get(API_URL+"/searchMentor/"+text);
+    }
+
+    findByTopicAndSubtopic(main, sub){
+        return axios
+            .post(API_URL +"/findMentorByTopics",{
+                description: main,
+                subtopics: sub
+            })
+    }
+
+    acceptApply(id){
+        return axios
+            .put(API_URL +"/accept/" + id);
+    }
+
+    rejectApply(id){
+        return axios
+            .delete(API_URL + "/reject/" + id);
     }
 }
 

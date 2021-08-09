@@ -30,10 +30,11 @@ public class MenteeController {
 
     @PostMapping("/addMentee")
     public ResponseEntity<?> addMentee(@RequestBody Mentee mentee){
-        User user = userRepository.findByUsername(mentee.getUsername()).get(0);
+        User user = userRepository.findByUsername(mentee.getUsername());
         if ( menteeRepository.findByUserIdAndTopic(user.getId(), mentee.getTopic()) != null){
             return ResponseEntity.ok("Bu kullanıcı zaten bir mentor ile çalışıyor");
-        }else if ( mentorRepository.findById(mentee.getMentorId()).get().getMentees().size() == 2){
+        }else if ( (mentorRepository.findById(mentee.getMentorId()).get().getMentees() != null ) &&
+                (mentorRepository.findById(mentee.getMentorId()).get().getMentees().size() ==2) ){
             return ResponseEntity.ok("Mentor bu konu için zaten iki mentee ile çalışıyor");
         }
 
@@ -43,6 +44,8 @@ public class MenteeController {
         mentee.setEmail(user.getEmail());
         mentee.setMentorName(mentor.getUsername());
         mentee.setMentorMail(mentor.getEmail());
+        mentee.setMentorId(mentor.getId());
+        menteeRepository.save(mentee);
 
         if(mentor.getMentees() != null){
             List<Mentee> menteeList = mentor.getMentees();
@@ -56,6 +59,6 @@ public class MenteeController {
 
         mentorRepository.save(mentor);
 
-        return ResponseEntity.ok(menteeRepository.save(mentee));
+        return ResponseEntity.ok(mentee);
     }
 }

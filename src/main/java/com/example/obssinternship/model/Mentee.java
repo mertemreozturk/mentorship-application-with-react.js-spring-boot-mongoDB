@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Document(collection = "mentee")
-public class Mentee extends Mentorship {
+public class Mentee extends Member{
     private String mentorId;
     private String mentorName;
     private String mentorMail;

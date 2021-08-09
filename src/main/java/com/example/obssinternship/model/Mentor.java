@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Document(collection = "mentor")
-public class Mentor extends Mentorship{
+public class Mentor extends Member{
     private List<Mentee> mentees;
     private boolean isAccepted;
     private int howManyPhases;

@@ -4,14 +4,14 @@ import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
-public class Mentorship {
+public class Member {
     @Id
     protected String id;
     protected String userId;
     protected String username;
     protected String email;
     protected String topic;
-    protected List<String> SubTopic;
+    protected List<String> subtopics;
 
     public String getId() {
         return id;
@@ -53,12 +53,11 @@ public class Mentorship {
         this.topic = topic;
     }
 
-    public List<String> getSubTopic() {
-        return SubTopic;
+    public List<String> getSubtopics() {
+        return subtopics;
     }
 
-    public void setSubTopic(List<String> subTopic) {
-        SubTopic = subTopic;
+    public void setSubtopics(List<String> subtopics) {
+        this.subtopics = subtopics;
     }
-
 }
