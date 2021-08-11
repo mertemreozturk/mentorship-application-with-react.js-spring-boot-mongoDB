@@ -9,6 +9,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import {IoLogOutOutline} from "react-icons/io5";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Detail from "./components/Detail";
+import Planning from "./components/Planning";
 
 class App extends Component {
     constructor(props) {
@@ -73,6 +74,7 @@ class App extends Component {
                         <Route exact path="/dashboard" component={Dashboard} />
                         <Route exact path={["/","/login"]} component={LoginPage} />
                         <Route exact path= "/details" component={Detail} />
+                        <Route exact path= "/planning" component={Planning}/>
                     </Switch>
                 </div>
             </div>

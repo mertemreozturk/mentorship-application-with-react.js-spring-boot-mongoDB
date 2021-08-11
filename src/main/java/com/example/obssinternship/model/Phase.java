@@ -10,17 +10,14 @@ import java.util.Date;
 public class Phase {
     @Id
     private String id;
-    private String mentorId;
-    private String menteeId;
     private String phaseName;
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private Date startDate;
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private Date endDate;
-    private Boolean isCompleted;
-    private String comment;
-    private double rate;
-
+    private String isCompleted;
+    /*private String mentorComment;
+    private String menteeComment;
+    private double mentorRate;
+    private double menteeRate;*/
 
     public String getId() {
         return id;
@@ -28,22 +25,6 @@ public class Phase {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getMentorId() {
-        return mentorId;
-    }
-
-    public void setMentorId(String mentorId) {
-        this.mentorId = mentorId;
-    }
-
-    public String getMenteeId() {
-        return menteeId;
-    }
-
-    public void setMenteeId(String menteeId) {
-        this.menteeId = menteeId;
     }
 
     public String getPhaseName() {
@@ -70,27 +51,43 @@ public class Phase {
         this.endDate = endDate;
     }
 
-    public Boolean getCompleted() {
+    public String getIsCompleted() {
         return isCompleted;
     }
 
-    public void setCompleted(Boolean completed) {
-        isCompleted = completed;
+    public void setIsCompleted(String isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
-    public String getComment() {
-        return comment;
+/*public String getMentorComment() {
+        return mentorComment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setMentorComment(String mentorComment) {
+        this.mentorComment = mentorComment;
     }
 
-    public double getRate() {
-        return rate;
+    public String getMenteeComment() {
+        return menteeComment;
     }
 
-    public void setRate(double rate) {
-        this.rate = rate;
+    public void setMenteeComment(String menteeComment) {
+        this.menteeComment = menteeComment;
     }
+
+    public double getMentorRate() {
+        return mentorRate;
+    }
+
+    public void setMentorRate(double mentorRate) {
+        this.mentorRate = mentorRate;
+    }
+
+    public double getMenteeRate() {
+        return menteeRate;
+    }
+
+    public void setMenteeRate(double menteeRate) {
+        this.menteeRate = menteeRate;
+    }*/
 }

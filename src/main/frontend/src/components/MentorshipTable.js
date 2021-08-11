@@ -123,8 +123,6 @@ const MentorshipTable = ({title, desc, user, who}) => {
     const mentorshipInfo = (mentorship) => {
         console.log(mentorship)
         history.push('/details/', mentorship);
-
-
     }
 
 

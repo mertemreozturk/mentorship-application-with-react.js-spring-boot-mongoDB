@@ -26,7 +26,7 @@ public class PhaseController {
     @Autowired
     private MenteeRepository menteeRepository;
 
-    @PostMapping("/addPhase")
+    /*@PostMapping("/addPhase")
     public ResponseEntity<?> addPhase(@RequestBody Phase phase){
         Mentor mentor = mentorRepository.findById(phase.getMentorId()).get();
 
@@ -35,7 +35,7 @@ public class PhaseController {
             return ResponseEntity.ok("Bütün fazlar tamamlandı");
         }
 
-        phaseRepository.save(phase);
+        phaseRepository.save(phase);*/
 
         /*List<Phase> phaseListForMentor = mentor.getPhases();
         phaseListForMentor.add(phase);
@@ -48,6 +48,12 @@ public class PhaseController {
         mentee.setPhases(phaseListForMentee);
         menteeRepository.save(mentee);*/
 
-        return ResponseEntity.ok(phase);
+     /*   return ResponseEntity.ok(phase);
     }
+
+    @PostMapping("/getAllPhases")
+    public ResponseEntity<?> getAllPhases(@RequestBody Phase phase){
+        return ResponseEntity.ok(phaseRepository.findByMenteeIdAndMentorId(phase.getMenteeId(),
+                phase.getMentorId()));
+    }*/
 }
