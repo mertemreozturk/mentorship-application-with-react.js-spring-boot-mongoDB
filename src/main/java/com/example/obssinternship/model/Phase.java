@@ -6,9 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document(collection = "phase")
 public class Phase {
-    @Id
     private String id;
     private String phaseName;
     private Date startDate;

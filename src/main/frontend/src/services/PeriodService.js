@@ -6,10 +6,10 @@ class PeriodService {
 
     addPhase(mentorId, menteeId, phases){
         return axios
-            .post(API_URL + "/createPhases", {
+            .put(API_URL + "/createPhases", {
                 mentorId: mentorId,
                 menteeId: menteeId,
-                phases: phases
+                phase: phases
             });
     }
 
@@ -27,6 +27,14 @@ class PeriodService {
                 mentorId: mentorId,
                 menteeId: menteeId
             });
+    }
+
+    triggerPhase(mentorId, menteeId){
+        return axios
+            .put(API_URL + "/triggerPhase", {
+                mentorId: mentorId,
+                menteeId: menteeId
+            })
     }
 
 }

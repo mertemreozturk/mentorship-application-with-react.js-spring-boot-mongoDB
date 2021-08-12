@@ -46,10 +46,21 @@ public class PeriodController {
                 period.getMenteeId()).getPhases());
     }
 
-    /*@PutMapping("triggerPhases")
+    @PutMapping("/triggerPhase")
     public ResponseEntity<?> triggerPhase(@RequestBody Period period){
-        Period period1 =
-        return ResponseEntity.ok();
-    }*/
+        Period period1 = periodRepository.findByMentorIdAndMenteeId(period.getMentorId(), period.getMenteeId());
+
+        for(Phase phase: period1.getPhases()){
+            if ( phase.getIsCompleted() == null){
+                phase.setStartDate(Calendar.getInstance().getTime());
+                phase.setIsCompleted("Devam Ediyor");
+                period1.setIsBegin(phase.getPhaseName());
+                break;
+            }
+        }
+
+        periodRepository.save(period1);
+        return ResponseEntity.ok(period1);
+    }
 
 }

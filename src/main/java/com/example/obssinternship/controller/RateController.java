@@ -24,4 +24,9 @@ public class RateController {
         return ResponseEntity.ok(rateRepository.findByPhaseId(id));
     }
 
+    @PostMapping("/doesExist")
+    public boolean doesExist(@RequestBody Rate rate){
+        return rateRepository.findByPhaseIdAndAndMemberId(rate.getPhaseId(), rate.getMemberId()) == null;
+    }
+
 }

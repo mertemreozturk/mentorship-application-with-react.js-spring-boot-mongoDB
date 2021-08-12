@@ -2,15 +2,18 @@ package com.example.obssinternship.controller;
 
 import com.example.obssinternship.model.Mentee;
 import com.example.obssinternship.model.Mentor;
+import com.example.obssinternship.model.Period;
 import com.example.obssinternship.model.User;
 import com.example.obssinternship.repository.MenteeRepository;
 import com.example.obssinternship.repository.MentorRepository;
+import com.example.obssinternship.repository.PeriodRepository;
 import com.example.obssinternship.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -26,6 +29,9 @@ public class MenteeController {
 
     @Autowired
     private MentorRepository mentorRepository;
+
+    @Autowired
+    private PeriodRepository periodRepository;
 
 
     @PostMapping("/addMentee")
@@ -58,6 +64,13 @@ public class MenteeController {
         }
 
         mentorRepository.save(mentor);
+
+        Period period = new Period();
+        period.setMentorId(mentor.getId());
+        period.setMenteeId(menteeRepository.findByUserIdAndTopic(user.getId(), mentee.getTopic()).getId());
+        period.setStartDate(Calendar.getInstance().getTime());
+        period.setIsBegin("Başlamadı");
+        periodRepository.save(period);
 
         return ResponseEntity.ok(mentee);
     }
