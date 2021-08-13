@@ -14,6 +14,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import CommentIcon from '@material-ui/icons/Comment';
 import RateService from "../services/RateService";
 import { Rating } from 'primereact/rating';
+import Phases from "./Phases";
 
 const Detail = () => {
     const location = useLocation();
@@ -21,9 +22,7 @@ const Detail = () => {
     const [period, setPeriod] = useState()
     const [phases, setPhases] = useState([])
     const [showPhase, setShowPhase] = useState(false)
-    const [comments, setComments] = useState(null)
     const [showRatingArea, setShowRatingArea] = useState(false)
-    const [val2, setVal2] = useState(null);
     const history = useHistory();
 
     useEffect( () => {
@@ -133,10 +132,11 @@ const Detail = () => {
                 (period.isBegin === "Başlamadı" ? <Button onClick={() => begin()} className="p-button-success p-button-rounded p-mr-2">Süreci Başlat</Button> :
                         null)
             }
-            <div className="card">
+            <Phases phaseList={phases}/>
+            {/*<div className="card">
                 <Carousel value={phases} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="352px"
                           itemTemplate={phaseTemplate} header={<h5>Fazlar</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
-            </div>
+            </div>*/}
         </div>
 
     );
