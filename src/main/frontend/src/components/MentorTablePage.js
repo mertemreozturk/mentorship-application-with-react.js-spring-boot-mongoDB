@@ -6,7 +6,7 @@ import AuthService from "../services/AuthService";
 import Button from "@material-ui/core/Button";
 import MentorService from "../services/MentorService";
 
-const TreeTablePage  = ({data, where}) => {
+const MentorTablePage  = ({data, where}) => {
     const [nodes, setNodes] = useState([]);
     const currentUser = AuthService.getCurrentUser();
 
@@ -84,4 +84,4 @@ const TreeTablePage  = ({data, where}) => {
     );
 }
 
-export default TreeTablePage
+export default MentorTablePage

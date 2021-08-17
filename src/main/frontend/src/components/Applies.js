@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import TreeTablePage from "./TreeTablePage";
+import MentorTablePage from "./MentorTablePage";
 
 
 const Applies = () => {
@@ -22,7 +22,7 @@ const Applies = () => {
 
     return (
         <div>
-            <TreeTablePage data = {applies}/>
+            <MentorTablePage data = {applies}/>
         </div>
     );
 };

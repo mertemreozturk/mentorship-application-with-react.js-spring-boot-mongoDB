@@ -1,20 +1,20 @@
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.css';
-//import 'primeflex/primeflex.css';
-
-import React, { useState, useEffect} from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
-import { Ripple } from 'primereact/ripple';
-import { Dropdown } from 'primereact/dropdown';
-import { InputText } from 'primereact/inputtext';
-import { classNames } from 'primereact/utils';
+import React, {useEffect, useState} from 'react';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {Button} from 'primereact/button';
+import {Ripple} from 'primereact/ripple';
+import {Dropdown} from 'primereact/dropdown';
+import {InputText} from 'primereact/inputtext';
+import {classNames} from 'primereact/utils';
 import MentorService from "../services/MentorService";
 import AuthService from "../services/AuthService";
 import MenteeService from "../services/MenteeService";
-import {useHistory, withRouter } from "react-router-dom";
+import {useHistory, withRouter} from "react-router-dom";
+import PeriodService from "../services/PeriodService";
+//import 'primeflex/primeflex.css';
 
 
 const MentorshipTable = ({title, desc, user, who}) => {
@@ -27,7 +27,7 @@ const MentorshipTable = ({title, desc, user, who}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageInputTooltip, setPageInputTooltip] = useState('Press \'Enter\' key to go to this page.');
     const history = useHistory();
-
+    const[per, setPer] = useState('')
     const onCustomPage1 = (event) => {
         setFirst1(event.first);
         setRows1(event.rows);
@@ -135,6 +135,22 @@ const MentorshipTable = ({title, desc, user, who}) => {
         );
     }
 
+
+
+    const getPeriod = (rowData) => {
+
+        PeriodService.getPeriodName(rowData.mentorId, rowData.id).then(
+            (res) => setPer(res.data)
+        );
+        console.log(per)
+
+        return (
+            <React.Fragment>
+                <h6>{per}</h6>
+            </React.Fragment>
+        );
+    }
+
     return (
         <div>
             <div className="card">
@@ -142,7 +158,7 @@ const MentorshipTable = ({title, desc, user, who}) => {
                 <DataTable value={who === "mentor" ? mentees : mentors} paginator paginatorTemplate={template1} first={first1} rows={rows1} onPage={onCustomPage1}>
                     <Column field={ who === "mentor" ? "username" : "mentorName"} header={desc}></Column>
                     <Column field= "topic" header="Konu"></Column>
-                    <Column field="company" header="Durum"></Column>
+                    <Column body={getPeriod} header="Durum"></Column>
                     <Column field="id" header="Detay"></Column>
                     <Column body={actionBodyTemplate}></Column>
                 </DataTable>

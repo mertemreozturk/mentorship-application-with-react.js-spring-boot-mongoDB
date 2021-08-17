@@ -3,7 +3,7 @@ import MentorshipTable from "./MentorshipTable";
 import AuthService from "../services/AuthService";
 import UserService from "../services/UserService";
 import MentorService from "../services/MentorService";
-import TreeTablePage from "./TreeTablePage";
+import MentorTablePage from "./MentorTablePage";
 
 
 const Process = () => {

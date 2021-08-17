@@ -5,9 +5,18 @@ import com.example.obssinternship.model.Phase;
 import java.util.List;
 
 public class PeriodRequest {
+    private String phaseId;
     private String mentorId;
     private String menteeId;
     private List<Phase> phase;
+
+    public String getPhaseId() {
+        return phaseId;
+    }
+
+    public void setPhaseId(String phaseId) {
+        this.phaseId = phaseId;
+    }
 
     public String getMentorId() {
         return mentorId;

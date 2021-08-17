@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
+import java.util.Date;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -25,10 +26,15 @@ public class PeriodController {
         return ResponseEntity.ok(periodRepository.save(period));
     }
 
-    @PostMapping("getPeriod")
+    @PostMapping("/getPeriod")
     public ResponseEntity<?> getPeriod(@RequestBody Period period){
         return ResponseEntity.ok(periodRepository.findByMentorIdAndMenteeId(period.getMentorId(),
                 period.getMenteeId()));
+    }
+
+    @PostMapping("/getPeriodName")
+    public String getPeriodName(@RequestBody Period period){
+        return periodRepository.findByMentorIdAndMenteeId(period.getMentorId(), period.getMenteeId()).getIsBegin();
     }
 
     @PutMapping("/createPhases")
@@ -51,6 +57,11 @@ public class PeriodController {
         Period period1 = periodRepository.findByMentorIdAndMenteeId(period.getMentorId(), period.getMenteeId());
 
         for(Phase phase: period1.getPhases()){
+            System.out.println(phase.getPhaseName()+"--"+phase.getIsCompleted());
+            if ( phase.getIsCompleted() != null && phase.getIsCompleted().equals("Devam Ediyor")){
+                phase.setIsCompleted("Faz Tamamlandı");
+            }
+
             if ( phase.getIsCompleted() == null){
                 phase.setStartDate(Calendar.getInstance().getTime());
                 phase.setIsCompleted("Devam Ediyor");
@@ -61,6 +72,19 @@ public class PeriodController {
 
         periodRepository.save(period1);
         return ResponseEntity.ok(period1);
+    }
+
+    @PostMapping("/controlPhase")
+    public boolean controlPhase(@RequestBody PeriodRequest periodRequest){
+        Period period1 = periodRepository.findByMentorIdAndMenteeId(periodRequest.getMentorId(), periodRequest.getMenteeId());
+
+        for(Phase phase: period1.getPhases()){
+            if ( phase.getIsCompleted().equals("Devam Ediyor") && phase.getId().equals(periodRequest.getPhaseId())){
+                Date currentDate = Calendar.getInstance().getTime();
+                return currentDate.compareTo(phase.getEndDate()) > 0;
+            }
+        }
+        return false;
     }
 
 }

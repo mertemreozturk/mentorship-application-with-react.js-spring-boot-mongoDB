@@ -108,8 +108,6 @@ const UserPanel =() => {
                     <Tab label="En Beğenilenler" icon={<FavoriteIcon />} {...a11yProps(1)} />
                     <Tab label="Mentor Ara" icon={<SearchIcon />} {...a11yProps(2)} />
                     <Tab label="Mentorluk Başvurusu Yap" icon={<HowToRegIcon />} {...a11yProps(3)} />
-                    <Tab label="Item Six" icon={<ThumbDown />} {...a11yProps(4)} />
-                    <Tab label="Item Seven" icon={<ThumbUp />} {...a11yProps(5)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
@@ -123,12 +121,6 @@ const UserPanel =() => {
             </TabPanel>
             <TabPanel value={value} index={3}>
                 <MakeApplication/>
-            </TabPanel>
-            <TabPanel value={value} index={4}>
-                Item Four
-            </TabPanel>
-            <TabPanel value={value} index={5}>
-                Item Five
             </TabPanel>
         </div>
     );

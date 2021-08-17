@@ -6,7 +6,7 @@ import {Dropdown} from "primereact/dropdown";
 import TopicService from "../services/TopicService";
 import {MultiSelect} from "primereact/multiselect";
 import Button from "@material-ui/core/Button";
-import TreeTablePage from "./TreeTablePage"
+import MentorTablePage from "./MentorTablePage"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -109,7 +109,7 @@ const SearchMentor = () => {
                     value={ search }
                     onChange={handleSearchChange}
             />
-            <TreeTablePage data={mentors} where="search"/>
+            <MentorTablePage data={mentors} where="search"/>
         </div>
     );
 }

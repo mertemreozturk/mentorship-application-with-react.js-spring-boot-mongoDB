@@ -21,6 +21,14 @@ class PeriodService {
             });
     }
 
+    getPeriodName(mentorId, menteeId){
+        return axios
+            .post(API_URL + "/getPeriodName", {
+                mentorId: mentorId,
+                menteeId: menteeId,
+            });
+    }
+
     getAllPhases(mentorId, menteeId) {
         return axios
             .post(API_URL + "/getAllPhases", {
@@ -35,6 +43,15 @@ class PeriodService {
                 mentorId: mentorId,
                 menteeId: menteeId
             })
+    }
+
+    controlPhase(id, mentorId, menteeId) {
+        return axios
+            .post(API_URL + "/controlPhase", {
+                phaseId: id,
+                mentorId: mentorId,
+                menteeId: menteeId
+            });
     }
 
 }

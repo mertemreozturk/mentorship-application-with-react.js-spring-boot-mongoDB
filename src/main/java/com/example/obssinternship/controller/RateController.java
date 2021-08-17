@@ -16,6 +16,7 @@ public class RateController {
 
     @PostMapping("/createRate")
     public ResponseEntity<?> createRate(@RequestBody Rate rate){
+        System.out.println(rate.getMemberId()+"-"+rate.getName());
         return ResponseEntity.ok(rateRepository.save(rate));
     }
 

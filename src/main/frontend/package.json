@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.0.2",
     "history": "^5.0.0",
+    "quill": "1.3.7",
     "primereact": "^6.5.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
