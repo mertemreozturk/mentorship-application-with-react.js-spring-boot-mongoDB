@@ -84,6 +84,26 @@ sn: Ozturk
 uid: ayse
 userPassword: 123456
 
+dn: uid=zeynep,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Zeynep Eda
+sn: Eda
+uid: zeynep
+userPassword: 123456
+
+dn: uid=ozge,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Ozge Simge
+sn: Simge
+uid: ozge
+userPassword: 123456
+
 dn: uid=admin,ou=people,dc=springframework,dc=org
 objectclass: top
 objectclass: person
@@ -156,6 +176,8 @@ uniqueMember: uid=bob,ou=people,dc=springframework,dc=org
 uniqueMember: uid=mert,ou=people,dc=springframework,dc=org
 uniqueMember: uid=emre,ou=people,dc=springframework,dc=org
 uniqueMember: uid=ayse,ou=people,dc=springframework,dc=org
+uniqueMember: uid=zeynep,ou=people,dc=springframework,dc=org
+uniqueMember: uid=ozge,ou=people,dc=springframework,dc=org
 uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
 
 dn: cn=managers,ou=groups,dc=springframework,dc=org

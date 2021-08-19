@@ -40,4 +40,11 @@ public class TopicController {
     public ResponseEntity<List<String>> getSubtopics(@RequestBody Topic topic){
         return ResponseEntity.ok(topicRepository.findByDescription(topic.getDescription()).getSubtopics());
     }
+
+    @PostMapping("/deleteTopic")
+    public ResponseEntity<?> deleteTopic(@RequestBody Topic topic){
+        Topic t = topicRepository.findByDescription(topic.getDescription());
+        topicRepository.delete(t);
+        return ResponseEntity.ok("Deleted");
+    }
 }

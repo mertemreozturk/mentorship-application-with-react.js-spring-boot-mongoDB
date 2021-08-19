@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {Calendar} from "primereact/calendar";
-import {useLocation} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import PeriodService from "../services/PeriodService";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const Planning = () => {
     const classes = useStyles()
     const location = useLocation();
+    const history = useHistory();
     const [inputFields, setInputFields] = useState([
         { id: uuidv4(), phaseName: '', endDate: '' },
     ]);
@@ -36,6 +37,7 @@ const Planning = () => {
         console.log("InputFields", inputFields);
         console.log(location)
         PeriodService.addPhase(location.state.mentorId, location.state.id, inputFields).then();
+        history.goBack();
     };
 
     const handleChangeInput = (id, event) => {

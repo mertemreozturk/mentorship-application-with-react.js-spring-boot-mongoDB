@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Detail from "./components/Detail";
 import Planning from "./components/Planning";
 import Rate from "./components/Rate";
+import CommentsPage from "./components/CommentsPage";
 
 class App extends Component {
     constructor(props) {
@@ -74,9 +75,10 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/dashboard" component={Dashboard} />
                         <Route exact path={["/","/login"]} component={LoginPage} />
-                        <Route exact path= "/details" component={Detail} />
+                        <Route exact path= "/details/:myId/:myNick" component={Detail} />
                         <Route exact path= "/planning" component={Planning}/>
                         <Route exact path= "/rate" component={Rate}/>
+                        <Route exact path= "/comments" component={CommentsPage}/>
                     </Switch>
                 </div>
             </div>

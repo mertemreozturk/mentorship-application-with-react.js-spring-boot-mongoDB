@@ -11,10 +11,11 @@ const Rate = () => {
     const [value, setValue] = React.useState(1);
     const [text, setText] = useState('')
     const history = useHistory()
-    console.log(location);
-
+    console.log(location.state[0])
+    console.log(location.state[1])
     const submit = () => {
-        RateService.createRate(location.state[0].id, location.state[1].id, location.state[1].username,
+
+        RateService.createRate(location.state[0].id, location.state[1], location.state[2],
             text, value).then();
         history.goBack();
     }

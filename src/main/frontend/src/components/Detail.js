@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useLocation, useHistory, withRouter } from "react-router-dom";
+import { useLocation, useHistory, withRouter, useParams} from "react-router-dom";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import MailIcon from '@material-ui/icons/Mail';
@@ -11,66 +11,57 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import DoneIcon from '@material-ui/icons/Done';
 import InfoIcon from '@material-ui/icons/Info';
-import CommentIcon from '@material-ui/icons/Comment';
 import RateService from "../services/RateService";
 
 const Detail = () => {
     const location = useLocation();
-    console.log(location.state.username)
     const [period, setPeriod] = useState()
     const [phases, setPhases] = useState([])
     const [showPhase, setShowPhase] = useState(false)
     const [showRatingArea, setShowRatingArea] = useState(false)
     const [isCompleted, setIsCompleted] = useState(false)
     const [comments, setComments] = useState(null)
+    const [userRates, setUserRates] = useState([])
     const history = useHistory();
+    const { myId, myNick } = useParams();
 
     useEffect( () => {
         PeriodService.getPeriod(location.state.mentorId, location.state.id).then(
             (res) => {setPeriod(res.data)}
         );
-        console.log(location.state.mentorId+"-----"+ location.state.id)
+        console.log(period)
         PeriodService.getAllPhases(location.state.mentorId, location.state.id).then(
             (res) => {setPhases(res.data)}
         );
-        /*PeriodService.controlPhase(location.state.mentorId, location.state.id).then(
-            (res) => {setIsCompleted(res.data)}
-        );*/
-    }, [location]);
+        RateService.rates(myId).then(
+            (res) => {setUserRates(res.data)}
+        )
+
+        console.log(userRates)
+    }, []);
 
     const header = (
         <img alt="Card" src="showcase/demo/images/usercard.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
     );
-    const footer = (
-        <span>
-            <Button label="Save" icon="pi pi-check" />
-            <Button label="Cancel" icon="pi pi-times" className="p-button-secondary p-ml-2" />
-        </span>
-    );
 
     const phaseTemplate = (phase) => {
-        console.log(phase)
         //<span className={`product-badge status-${phase.inventoryStatus.toLowerCase()}`}>{phase.inventoryStatus}</span>
         return (
             <div className="phase-item" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                {phases.length === 0 ?
-                    <Button onClick={() => goToPlan()} className="p-button-success p-button-rounded p-mr-2">Süreç Planla</Button> :
-                    (period.isBegin === "Başlamadı" ? <Button onClick={() => begin()} className="p-button-success p-button-rounded p-mr-2">Süreci Başlat</Button> :
-                        null)
-                }
                 <div className="phase-item-content">
                     <div>
                         <h4 className="p-mb-1">{phase.phaseName}</h4>
-                        <h6 className="p-mt-0 p-mb-3"><PlayArrowIcon/>{phase.startDate === null ? "Faz başlamadı" : phase.startDate}</h6>
-                        <h6 className="p-mt-0 p-mb-3"><DoneIcon/>{phase.endDate}</h6>
+                        <h6 className="p-mt-0 p-mb-3"><PlayArrowIcon/>{phase.startDate === null ? "Faz başlamadı" : phase.startDate.substring(0, 10) +" "+ phase.startDate.substring(11, 19)}</h6>
+                        <h6 className="p-mt-0 p-mb-3"><DoneIcon/>{phase.endDate.substring(0, 10)} {phase.endDate.substring(11, 19)}</h6>
                         <h5 className="p-mt-0 p-mb-3"><InfoIcon/>{phase.isCompleted === null ? "Başlamadı" : phase.isCompleted}</h5>
                         {
                             (phase.isCompleted === 'Devam Ediyor' && controlphs(phase.id) )?
                                 <Button onClick={() => ratePhase(phase)} className="p-button-success p-button-rounded p-mr-2">Fazı Tamamla</Button> :
-                                ( (phase.isCompleted === 'Faz Tamamlandı' && phaseComment(phase.id)) ?
-                                        <Button onClick={() => onlyRate(phase)} className="p-button-success p-button-rounded p-mr-2">Fazı Değerlendir</Button> : null)
+                                (phase.isCompleted === 'Faz Tamamlandı' && !userRates.includes(phase.id) ) ?
+                                        <Button onClick={() => onlyRate(phase)} className="p-button-success p-button-rounded p-mr-2">Fazı Değerlendir</Button> : null
                         }
-                        <div className="car-buttons p-mt-5">
+
+                        <div className="car-buttons p-mt-5" style={{marginTop:10}}>
                             <Button icon="pi pi-star" className="p-button-success p-button-rounded p-mr-2" onClick={() => getComments(phase.id)}/>
                             <Button icon="pi pi-cog" className="p-button-help p-button-rounded" />
                         </div>
@@ -96,64 +87,79 @@ const Detail = () => {
     const begin = () => {
         console.log("for trigger")
         PeriodService.triggerPhase(location.state.mentorId, location.state.id).then();
+        window.location.reload()
     }
 
     function phaseComment  (id) {
-        console.log("infoforphase")
-        //setShowPhase(!showPhase)
         RateService.doesExist(id, location.state.id).then(
-            (res) => {setShowRatingArea(res.data)}
+            (res) => {
+                //setShowRatingArea(res.data)
+                return res.data;
+            }
         )
-        return showRatingArea;
+        //return showRatingArea;
     }
 
     const ratePhase = (phase) => {
         PeriodService.triggerPhase(location.state.mentorId, location.state.id).then();
-        history.push('/rate',[phase, location.state])
+        history.push('/rate',[phase, myId, myNick])
     }
 
     const onlyRate = (phase) => {
-        history.push('/rate',[phase, location.state])
+        history.push('/rate',[phase, myId, myNick])
     }
 
     const getComments = (id) => {
-        RateService.getRates(id).then(
+        /*RateService.getRates(id).then(
             (res) => {setComments(res.data)}
         );
-        console.log(comments)
+        console.log(comments)*/
+
+        history.push('/comments', id)
+        //setShowRatingArea(!showRatingArea)
     }
 
     //console.log(period)
     //console.log(showRatingArea)
     return (
-
+        //period.startDate.substring(0, 10)
         <div>
             <div style={{ width: '70%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <Card title="Mentor" subTitle= {location.state.mentorName}  style={{ width: '22em' , marginLeft: '200px'}}  footer={footer} >
                     <p className="p-m-0" style={{lineHeight: '1.5'}}>
-                        <MailIcon/> {location.state.mentorMail}
+                       Başlangıç Tarihi <DateRangeIcon/> {1}
                     </p>
-                    <p className="p-m-0" style={{lineHeight: '1.5'}}>
-                        <LibraryBooksIcon/> {location.state.topic}
-                    </p>
-                </Card>
-                <Card title="Mentee" subTitle={location.state.username} style={{ width: '22em', marginRight: '-200px' }}  footer={footer} >
-                    <p className="p-m-0" style={{lineHeight: '1.5'}}>
-                        <MailIcon/> {location.state.email}
-                    </p>
-                    <p className="p-m-0" style={{lineHeight: '1.5'}}>
-                        <LibraryBooksIcon/> {location.state.subtopics.toString()}
-                    </p>
-                </Card>
+                        <Card title="Mentor"  style={{ width: '22em' , marginLeft: '200px'}}  >
+                            <p className="p-m-0" style={{lineHeight: '1.5'}}>
+                                <PersonIcon/> {location.state.mentorName}
+                            </p>
+                            <p className="p-m-0" style={{lineHeight: '1.5'}}>
+                                <MailIcon/> {location.state.mentorMail}
+                            </p>
+                            <p className="p-m-0" style={{lineHeight: '1.5'}}>
+                                <LibraryBooksIcon/> {location.state.topic}
+                            </p>
+                        </Card>
+                        <Card title="Mentee" style={{ width: '22em', marginRight: '-200px'}}  >
+                            <p className="p-m-0" style={{lineHeight: '1.5'}}>
+                                <PersonIcon/> {location.state.username}
+                            </p>
+                            <p className="p-m-0" style={{lineHeight: '1.5'}}>
+                                <MailIcon/> {location.state.email}
+                            </p>
+                            <p className="p-m-0" style={{lineHeight: '1.5'}}>
+                                <LibraryBooksIcon/> {location.state.subtopics.toString()}
+                            </p>
+                        </Card>
+
             </div>
-            {/*{phases.length === 0 ?
+            {phases.length === 0 ?
                 <Button onClick={() => goToPlan()} className="p-button-success p-button-rounded p-mr-2">Süreç Planla</Button> :
                 (period.isBegin === "Başlamadı" ? <Button onClick={() => begin()} className="p-button-success p-button-rounded p-mr-2">Süreci Başlat</Button> :
                         null)
-            }*/}
+            }
             <div className="card">
-                <Carousel value={phases} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="352px"
-                          itemTemplate={phaseTemplate} header={<h5>Fazlar</h5>} style={{maxWidth: '400px', marginTop: '2em'}} />
+                <Carousel value={phases} numVisible={1} numScroll={1} orientation="vertical" verticalViewPortHeight="240px"
+                          itemTemplate={phaseTemplate} header={<h5>Fazlar</h5>} style={{maxWidth: '170px', marginTop: '2em'}} />
             </div>
         </div>
     );

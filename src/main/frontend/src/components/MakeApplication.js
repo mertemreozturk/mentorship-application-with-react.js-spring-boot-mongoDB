@@ -1,7 +1,6 @@
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.css';
-//import 'primeflex/primeflex.css';
 import { Dropdown } from 'primereact/dropdown';
 import React, { useState, useEffect } from 'react';
 import { MultiSelect } from 'primereact/multiselect';
@@ -10,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import AuthService from "../services/AuthService";
 import { InputTextarea } from 'primereact/inputtextarea';
 import MentorService from "../services/MentorService";
+import {textAlign} from "@material-ui/system";
 
 const MakeApplication = () => {
     const currentUser = AuthService.getCurrentUser();
@@ -22,7 +22,7 @@ const MakeApplication = () => {
     const [about, setAbout] = useState('');
     const [numberOfPhases, setNumberOfPhases] = useState('');
 
-    const phases = [1, 2 , 3, 4, 5];
+    //const phases = [1, 2 , 3, 4, 5];
 
     /*const topics = [
          'New York' ,
@@ -55,8 +55,7 @@ const MakeApplication = () => {
     }
 
     const submit = () => {
-        console.log(numberOfPhases);
-        MentorService.createMentor(currentUser.username, selectedMainTopic, selectedTopic, numberOfPhases, about).then();
+        MentorService.createMentor(currentUser.username, selectedMainTopic, selectedTopic, about).then();
         window.location.reload();
     }
 
@@ -73,11 +72,10 @@ const MakeApplication = () => {
                     <MultiSelect value={selectedTopic} options={topics} onChange={(e) => setSelectedTopic(e.value)} placeholder="Alt konu seç" display="chip" />
                     : null
                 }
+                <h5 style={{marginTop:30}}>Hakkımda</h5>
                 <InputTextarea value={about} onChange={(e) => setAbout(e.target.value)} rows={5} cols={30} />
-                <h5>Bu program için kaç faz olmalı?</h5>
-                <Dropdown value={numberOfPhases} options={phases} onChange={(e) => setNumberOfPhases(e.value)} placeholder="Ana konu seç" />
-                <Button variant="contained" color="primary" onClick={submit}>Başvur</Button>
             </div>
+            <Button style={{marginTop:20}}variant="contained" color="primary" onClick={submit}>Başvur</Button>
         </div>
 
     );

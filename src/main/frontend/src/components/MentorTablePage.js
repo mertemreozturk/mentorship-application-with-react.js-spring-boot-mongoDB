@@ -3,7 +3,7 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import MenteeService from "../services/MenteeService";
 import AuthService from "../services/AuthService";
-import Button from "@material-ui/core/Button";
+import { Button } from 'primereact/button';
 import MentorService from "../services/MentorService";
 
 const MentorTablePage  = ({data, where}) => {
@@ -27,21 +27,17 @@ const MentorTablePage  = ({data, where}) => {
                         data: {
                             name:
                                 where === "search" ?
-                                    (<button variant="contained" color= "green"
-                                        onClick={() => acceptMentor(data[i].topic, data[i].subtopics, data[i].id)}>
-                                    Mentor seç </button>)
+                                    (<Button label="Mentor seç" icon="pi pi-check" className="p-button-success p-button-rounded p-mr-2"
+                                        onClick={() => acceptMentor(data[i].topic, data[i].subtopics, data[i].id)}/>
+                                    )
                                     : ( <view>
                                             <view>
-                                                <button variant="contained" color= "green"
-                                                    onClick={() => acceptApply(data[i].id)}>
-                                                    Kabul et
-                                                </button>
+                                                <Button label="Kabul et" icon="pi pi-check" className="p-button-success p-button-rounded p-mr-2"
+                                                    onClick={() => acceptApply(data[i].id)}/>
                                             </view>
                                             <view>
-                                                <button variant="contained" color= "green"
-                                                    onClick={() => rejectApply(data[i].id)}>
-                                                    Reddet
-                                                </button>
+                                                <Button label="Reddet" icon="pi pi-times" className="p-button-danger p-button-rounded p-mr-5"
+                                                    onClick={() => rejectApply(data[i].id)}/>
                                             </view>
                                         </view>),
                             email: data[i].about,
@@ -65,17 +61,19 @@ const MentorTablePage  = ({data, where}) => {
 
     const acceptApply = (mentorId) => {
         MentorService.acceptApply(mentorId).then();
+        window.location.reload()
     }
 
     const rejectApply = (mentorId) => {
         MentorService.rejectApply(mentorId).then();
+        window.location.reload()
     }
 
     return (
         <div>
             <div className="card">
                 <TreeTable value={nodes} paginator rows={10}>
-                    <Column field="name" header="Name" expander></Column>
+                    <Column field="name" header="İsim" expander></Column>
                     <Column field="email" header="Email"></Column>
                     <Column field="topic" header="Uzmanlık"></Column>
                 </TreeTable>

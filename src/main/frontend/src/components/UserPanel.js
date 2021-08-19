@@ -6,18 +6,13 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
-import ThumbDown from '@material-ui/icons/ThumbDown';
-import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import MakeApplication from './MakeApplication'
 import SearchMentor from "./SearchMentor";
 import Process from "./Process";
-import UserService from "../services/UserService";
-import AuthService from "../services/AuthService";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -114,7 +109,7 @@ const UserPanel =() => {
                 <Process/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                en beğenilen fazlar
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <SearchMentor/>

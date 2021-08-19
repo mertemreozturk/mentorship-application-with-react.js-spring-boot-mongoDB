@@ -6,13 +6,13 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import HowToRegIcon from '@material-ui/icons/HowToReg';
-import ThumbDown from '@material-ui/icons/ThumbDown';
-import ThumbUp from '@material-ui/icons/ThumbUp';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Box from '@material-ui/core/Box';
 import Applies from "./Applies";
 import AddNewTopic from "./AddNewTopic";
+import DeleteTopic from "./DeleteTopic";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -78,24 +78,20 @@ const AdminPanel =() => {
                     <Tab label="Başvurular" icon={<HowToRegIcon />} {...a11yProps(0)} />
                     <Tab label="En Beğenilenler" icon={<FavoriteIcon />} {...a11yProps(1)} />
                     <Tab label="Yeni Konu Oluştur" icon={<AddCircleIcon />} {...a11yProps(2)} />
-                    <Tab label="Item Six" icon={<ThumbDown />} {...a11yProps(3)} />
-                    <Tab label="Item Seven" icon={<ThumbUp />} {...a11yProps(4)} />
+                    <Tab label="Bir Konuyu Sil" icon={<DeleteIcon />} {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
                 <Applies/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                en beğenilen fazlar
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <AddNewTopic/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                Item Four
-            </TabPanel>
-            <TabPanel value={value} index={4}>
-                Item Five
+                <DeleteTopic/>
             </TabPanel>
         </div>
     );

@@ -56,6 +56,7 @@ public class PeriodController {
     public ResponseEntity<?> triggerPhase(@RequestBody Period period){
         Period period1 = periodRepository.findByMentorIdAndMenteeId(period.getMentorId(), period.getMenteeId());
 
+        boolean flag = true;
         for(Phase phase: period1.getPhases()){
             System.out.println(phase.getPhaseName()+"--"+phase.getIsCompleted());
             if ( phase.getIsCompleted() != null && phase.getIsCompleted().equals("Devam Ediyor")){
@@ -66,8 +67,13 @@ public class PeriodController {
                 phase.setStartDate(Calendar.getInstance().getTime());
                 phase.setIsCompleted("Devam Ediyor");
                 period1.setIsBegin(phase.getPhaseName());
+                flag = false;
                 break;
             }
+        }
+
+        if(flag){
+            period1.setIsBegin("Tamamlandı");
         }
 
         periodRepository.save(period1);

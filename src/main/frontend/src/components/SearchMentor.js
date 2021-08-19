@@ -97,18 +97,22 @@ const SearchMentor = () => {
                     <MultiSelect value={selectedTopic} options={topics} onChange={(e) => setSelectedTopic(e.value)} placeholder="Alt konu seç" display="chip" />
                     : null
                 }
-                <Button variant="contained" color="primary" onClick={submit}>Mentor ara</Button>
              </div>
-            <h5>İstediğiniz bir kelimeye göre arama yapın</h5>
-            <TextField
-                    inputProps={{min: 0, style: { textAlign: 'center' }}}
+            <Button variant="contained" color="primary" onClick={submit}>Mentor ara</Button>
+            <div className="card">
+                <h5>İstediğiniz bir kelimeye göre arama yapın</h5>
+                <TextField
+                    style={{marginTop:30}}
+                    inputProps={{min: 0, style: { textAlign: 'center'}}}
                     id="outlined-basic"
                     label="mentor ara"
                     variant="outlined"
                     type="search"
                     value={ search }
                     onChange={handleSearchChange}
-            />
+                />
+            </div>
+
             <MentorTablePage data={mentors} where="search"/>
         </div>
     );

@@ -20,6 +20,13 @@ class TopicService{
             description: main
         })
     }
+
+    deleteTopic(main){
+        return axios
+            .post(API_URL + "/deleteTopic", {
+                description: main
+            })
+    }
 }
 
 export default new TopicService();

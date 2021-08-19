@@ -10,4 +10,6 @@ public interface RateRepository extends MongoRepository<Rate, String> {
     List<Rate> findByPhaseId(String phaseId);
 
     Rate findByPhaseIdAndAndMemberId(String phaseId, String memberId);
+
+    List<Rate> findByMemberId(String memberId);
 }

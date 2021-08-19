@@ -4,13 +4,17 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import SubTopics from "./SubTopics";
 import Chip from "@material-ui/core/Chip";
 import TopicService from "../services/TopicService";
 import AddIcon from '@material-ui/icons/Add';
+import { InputText } from 'primereact/inputtext';
+import {Button} from "primereact/button";
+import IconButton from "@material-ui/core/IconButton";
+import RemoveIcon from '@material-ui/icons/Remove';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -90,7 +94,7 @@ export default function AddNewTopic() {
         return (
             <div>
                 <form className='add-form' >
-                        <input className='input-form'
+                        <InputText className='input-form'
                             placeholder='Ana Konu'
                             value={text}
                             onChange={(e) => setText(e.target.value)}
@@ -99,14 +103,18 @@ export default function AddNewTopic() {
             </div>
         );
     };
-
+    //<Button icon="pi pi-minus" className="p-button-danger p-button-rounded p-mr-2" value='remove' onClick={removeClick.bind(i)} />
     function dynamicInput() {
 
         function createInputs() {
             return values.val.map((el, i) =>
                 <div key={i}>
-                    <input type="text" value={el||''} onChange={handleChange.bind(i)} />
-                    <input type='button' value='remove' onClick={removeClick.bind(i)} />
+                    <InputText value={el||''} onChange={handleChange.bind(i)} />
+                    <IconButton
+                        onClick={removeClick.bind(i)}
+                    >
+                        <RemoveIcon />
+                    </IconButton>
                 </div>
             );
         }
@@ -132,11 +140,16 @@ export default function AddNewTopic() {
             //alert('A name was submitted: ' + values.val.join(', '));
             //event.preventDefault();
         }
-
+        //Button icon="pi pi-plus" className="p-button-help p-button-rounded p-mr-2"
+        //<Button icon="pi pi-plus" className="p-button-help p-button-rounded p-mr-2"  onClick={addClick} />
         return (
             <form>
                 {createInputs()}
-                <input type='button' value='add more' onClick={addClick} />
+                <IconButton
+                    onClick={addClick}
+                >
+                    <AddIcon />
+                </IconButton>
                 {/*{chipData.map((data) => {
 
                     return (
@@ -189,7 +202,7 @@ export default function AddNewTopic() {
             </Stepper>
             {activeStep === steps.length && (
                 <Paper square elevation={0} className={classes.resetContainer}>
-                    <Typography>All steps completed - you&apos;re finished</Typography>
+                    <Typography>Başarıyla oluşturuldu - yeni bir konu oluştur</Typography>
                     <Button onClick={handleReset} className={classes.button}>
                         Reset
                     </Button>

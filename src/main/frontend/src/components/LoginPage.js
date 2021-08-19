@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
+import { GoogleLogin } from 'react-google-login';
 import AuthService from "../services/AuthService";
 import Header from "./Header";
 
@@ -82,6 +82,9 @@ export default class Login extends Component {
     }
 
     render() {
+        const responseGoogle = (response) => {
+            console.log(response);
+        }
         return (
             <div className="col-md-12">
                 <Header title = "Mentorluk Uygulamasına Hoşgeldiniz!"/>
@@ -104,7 +107,7 @@ export default class Login extends Component {
                                 type="text"
                                 className="form-control"
                                 name="username"
-                                placeholder="Enter username"
+                                placeholder="Kullanıcı adınızı girin"
                                 value={this.state.username}
                                 onChange={this.onChangeUsername}
                                 validations={[required]}
@@ -117,7 +120,7 @@ export default class Login extends Component {
                                 type="password"
                                 className="form-control"
                                 name="password"
-                                placeholder="Enter password"
+                                placeholder="Şifrenizi girin"
                                 value={this.state.password}
                                 onChange={this.onChangePassword}
                                 validations={[required]}
@@ -126,6 +129,7 @@ export default class Login extends Component {
 
                         <div className="form-group">
                             <button
+                                style={{marginTop:10}}
                                 className="btn btn-outline-success"
                                 color="success"
                                 disabled={this.state.loading}
@@ -133,7 +137,7 @@ export default class Login extends Component {
                                 {this.state.loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}
-                                <span>Login</span>
+                                <span>Giriş yap</span>
                             </button>
                         </div>
 
@@ -151,6 +155,13 @@ export default class Login extends Component {
                             }}
                         />
                     </Form>
+                    <GoogleLogin
+                        clientId="84252563875-qe2grmmntu6d35uctv5ojt6k61ohmuck.apps.googleusercontent.com"
+                        buttonText="Google ile giriş yap"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    />
                 </div>
             </div>
         );

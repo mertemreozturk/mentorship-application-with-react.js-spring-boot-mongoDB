@@ -10,7 +10,7 @@ import java.util.List;
 public class Mentor extends Member{
     private List<Mentee> mentees;
     private boolean isAccepted;
-    private int howManyPhases;
+    //private int howManyPhases;
     @TextIndexed
     private String about;
 
@@ -30,13 +30,6 @@ public class Mentor extends Member{
         isAccepted = accepted;
     }
 
-    public int getHowManyPhases() {
-        return howManyPhases;
-    }
-
-    public void setHowManyPhases(int howManyPhases) {
-        this.howManyPhases = howManyPhases;
-    }
 
     public String getAbout() {
         return about;

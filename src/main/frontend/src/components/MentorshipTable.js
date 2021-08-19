@@ -14,11 +14,10 @@ import AuthService from "../services/AuthService";
 import MenteeService from "../services/MenteeService";
 import {useHistory, withRouter} from "react-router-dom";
 import PeriodService from "../services/PeriodService";
-//import 'primeflex/primeflex.css';
 
 
 const MentorshipTable = ({title, desc, user, who}) => {
-
+    const [period, setPeriod] = useState()
     const currentUser = AuthService.getCurrentUser();
     const [mentors, setMentors] = useState();
     const [mentees, setMentees] = useState();
@@ -122,11 +121,30 @@ const MentorshipTable = ({title, desc, user, who}) => {
 
     const mentorshipInfo = (mentorship) => {
         console.log(mentorship)
-        history.push('/details/', mentorship);
+        PeriodService.getPeriod(mentorship.mentorId, mentorship.id).then(
+            (res) => {setPeriod(res.data)}
+        );
+        console.log(period)
+
+        if ( who === "mentor"){
+            let myId = mentorship.mentorId;
+            let myNick = mentorship.mentorName;
+            history.push(`/details/${myId}/${myNick}`, mentorship);
+        }else{
+            let myId = mentorship.id;
+            let myNick = mentorship.username;
+            history.push(`/details/${myId}/${myNick}`, mentorship);
+        }
+    }
+
+    const mentorInfo = (mentorship) => {
+        let id = mentorship.mentorId;
+        history.push(`/details/${id}`, mentorship);
     }
 
 
     const actionBodyTemplate = (rowData) => {
+        console.log(rowData)
         //icon="pi pi-pencil"
         return (
             <React.Fragment>
@@ -159,8 +177,7 @@ const MentorshipTable = ({title, desc, user, who}) => {
                     <Column field={ who === "mentor" ? "username" : "mentorName"} header={desc}></Column>
                     <Column field= "topic" header="Konu"></Column>
                     <Column body={getPeriod} header="Durum"></Column>
-                    <Column field="id" header="Detay"></Column>
-                    <Column body={actionBodyTemplate}></Column>
+                    <Column body={actionBodyTemplate} header="Detay"></Column>
                 </DataTable>
             </div>
         </div>

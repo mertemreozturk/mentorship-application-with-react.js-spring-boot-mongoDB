@@ -28,6 +28,13 @@ class RateService {
             });
     }
 
+    rates(memberId){
+        return axios
+            .post(API_URL + "/rates", {
+                memberId: memberId
+            })
+    }
+
 }
 
 export default new RateService();

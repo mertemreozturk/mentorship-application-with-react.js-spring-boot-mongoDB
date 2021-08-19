@@ -4,13 +4,12 @@ const API_URL = 'http://localhost:8080/api/mentor';
 
 
 class MentorService {
-    createMentor(name, topic, subTopic, numberOfPhases, about) {
+    createMentor(name, topic, subTopic, about) {
         return axios
             .post(API_URL + "/addMentor", {
                 username: name,
                 topic: topic,
                 subtopics: subTopic,
-                howManyPhases: numberOfPhases,
                 about: about
             });
     }
