@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface PhaseRepository extends MongoRepository<Phase, String> {
 
-    //List<Phase> findByMenteeIdAndMentorId(String menteeId, String mentorId);
 }

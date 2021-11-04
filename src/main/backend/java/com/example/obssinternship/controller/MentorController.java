@@ -12,11 +12,11 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -55,11 +55,13 @@ public class MentorController {
         return ResponseEntity.ok(mentees);
     }
 
-    @GetMapping("/allApplies")
+    @PreAuthorize("hasRole('ROLE_MANAGERS')")
+    @GetMapping("/admin/allApplies")
     public ResponseEntity<List<Mentor>> getAllApplies(){
         return ResponseEntity.ok(mentorRepository.findByIsAccepted(false));
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGERS')")
     @PutMapping("/accept/{id}")
     public ResponseEntity<Mentor> accept(@PathVariable String id){
         Mentor mentor = mentorRepository.findById(id).get();
@@ -67,6 +69,7 @@ public class MentorController {
         return ResponseEntity.ok(mentorRepository.save(mentor));
     }
 
+    @PreAuthorize("hasRole('ROLE_MANAGERS')")
     @DeleteMapping("/reject/{id}")
     public ResponseEntity<?> reject(@PathVariable String id){
         Mentor mentor = mentorRepository.findById(id).get();
@@ -76,35 +79,11 @@ public class MentorController {
 
     @GetMapping("/searchMentor/{textQuery}")
     public ResponseEntity<?> searchMentor(@PathVariable String textQuery){
-        /*TextCriteria criteria = TextCriteria
-                .forDefaultLanguage()
-                .matching(searchPhrase);
-
-        TextQuery query = TextQuery.queryText(criteria);
-
-        List<Mentor> mentors = mongoTemplate.find(query, Mentor.class);*/
-
-        /*TextQuery query = TextQuery.queryText(new TextCriteria().matchingAny(textQuery)).sortByScore();
-        List<Mentor> result = mongoTemplate.find(query, Mentor.class, "mentor");*/
-        return ResponseEntity.ok(mentorRepository.findMentorByRegexpAbout(textQuery));
+        return ResponseEntity.ok(mentorRepository.findMentorByRegexpAboutAndIsAccepted(textQuery, true));
     }
 
     @PostMapping("/findMentorByTopics")
     public ResponseEntity<?> findMentorByTopics(@RequestBody Topic topic){
-        //List<Mentor> mentors = new ArrayList<>();
-        /*for(Mentor m: mentorRepository.findByTopic(topic.getDescription())){
-            System.out.println(m);
-            boolean flag = true;
-            for(String s: topic.getSubtopics()){
-                if(!m.getSubtopics().contains(s)){
-                    flag = false;
-                    break;
-                }
-            }
-            if(flag){
-                mentors.add(m);
-            }
-        }*/
         return ResponseEntity.ok(mentorRepository.findByTopicAndSubtopicsContainsAndIsAccepted(topic.getDescription(),
                 topic.getSubtopics(),
                 true));

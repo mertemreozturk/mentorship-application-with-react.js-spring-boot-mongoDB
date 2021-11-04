@@ -17,10 +17,7 @@ const Detail = () => {
     const location = useLocation();
     const [period, setPeriod] = useState()
     const [phases, setPhases] = useState([])
-    const [showPhase, setShowPhase] = useState(false)
-    const [showRatingArea, setShowRatingArea] = useState(false)
     const [isCompleted, setIsCompleted] = useState(false)
-    const [comments, setComments] = useState(null)
     const [userRates, setUserRates] = useState([])
     const history = useHistory();
     const { myId, myNick } = useParams();
@@ -43,6 +40,7 @@ const Detail = () => {
     const header = (
         <img alt="Card" src="showcase/demo/images/usercard.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
     );
+
 
     const phaseTemplate = (phase) => {
         //<span className={`product-badge status-${phase.inventoryStatus.toLowerCase()}`}>{phase.inventoryStatus}</span>
@@ -122,11 +120,11 @@ const Detail = () => {
     //console.log(period)
     //console.log(showRatingArea)
     return (
-        //period.startDate.substring(0, 10)
+        //period.startDate.substring(0, 10) {period.startDate.substring(0, 10)}
         <div>
             <div style={{ width: '70%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <p className="p-m-0" style={{lineHeight: '1.5'}}>
-                       Başlangıç Tarihi <DateRangeIcon/> {1}
+                       Başlangıç Tarihi <DateRangeIcon/>
                     </p>
                         <Card title="Mentor"  style={{ width: '22em' , marginLeft: '200px'}}  >
                             <p className="p-m-0" style={{lineHeight: '1.5'}}>

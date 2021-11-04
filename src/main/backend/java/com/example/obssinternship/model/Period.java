@@ -15,7 +15,13 @@ public class Period {
     private List<Phase> phases;
     private String isBegin;
     private Date startDate;
-    //private int howManyPhases;
+
+    public Period(String mentorId, String menteeId, String isBegin, Date startDate) {
+        this.mentorId = mentorId;
+        this.menteeId = menteeId;
+        this.isBegin = isBegin;
+        this.startDate = startDate;
+    }
 
     public String getId() {
         return id;

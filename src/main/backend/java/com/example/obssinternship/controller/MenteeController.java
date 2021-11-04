@@ -65,11 +65,9 @@ public class MenteeController {
 
         mentorRepository.save(mentor);
 
-        Period period = new Period();
-        period.setMentorId(mentor.getId());
-        period.setMenteeId(menteeRepository.findByUserIdAndTopic(user.getId(), mentee.getTopic()).getId());
-        period.setStartDate(Calendar.getInstance().getTime());
-        period.setIsBegin("Başlamadı");
+        Period period = new Period(mentor.getId(), menteeRepository.findByUserIdAndTopic(user.getId(), mentee.getTopic()).getId(),
+                "Başlamadı", Calendar.getInstance().getTime());
+
         periodRepository.save(period);
 
         return ResponseEntity.ok(mentee);

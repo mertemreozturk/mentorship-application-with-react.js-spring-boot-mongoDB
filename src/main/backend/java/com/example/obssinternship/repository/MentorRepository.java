@@ -15,7 +15,7 @@ public interface MentorRepository extends MongoRepository<Mentor, String> {
     List<Mentor> findByUsername(String username);
 
     @Query("{ 'about' : { $regex: ?0 } }")
-    List<Mentor> findMentorByRegexpAbout(String about);
+    List<Mentor> findMentorByRegexpAboutAndIsAccepted(String about, boolean isAccepted);
 
     List<Mentor> findByTopicAndSubtopicsContainsAndIsAccepted(String topic, List<String> subtopics, boolean isAccepted);
 
