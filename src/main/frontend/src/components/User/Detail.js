@@ -5,13 +5,13 @@ import { Button } from 'primereact/button';
 import MailIcon from '@material-ui/icons/Mail';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import PersonIcon from '@material-ui/icons/Person';
-import PeriodService from "../services/PeriodService";
+import PeriodService from "../../services/PeriodService";
 import { Carousel } from 'primereact/carousel';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import DoneIcon from '@material-ui/icons/Done';
 import InfoIcon from '@material-ui/icons/Info';
-import RateService from "../services/RateService";
+import RateService from "../../services/RateService";
 
 const Detail = () => {
     const location = useLocation();
@@ -26,7 +26,7 @@ const Detail = () => {
         PeriodService.getPeriod(location.state.mentorId, location.state.id).then(
             (res) => {setPeriod(res.data)}
         );
-        console.log(period)
+
         PeriodService.getAllPhases(location.state.mentorId, location.state.id).then(
             (res) => {setPhases(res.data)}
         );
@@ -34,16 +34,10 @@ const Detail = () => {
             (res) => {setUserRates(res.data)}
         )
 
-        console.log(userRates)
+
     }, []);
 
-    const header = (
-        <img alt="Card" src="showcase/demo/images/usercard.png" onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} />
-    );
-
-
     const phaseTemplate = (phase) => {
-        //<span className={`product-badge status-${phase.inventoryStatus.toLowerCase()}`}>{phase.inventoryStatus}</span>
         return (
             <div className="phase-item" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <div className="phase-item-content">
@@ -83,7 +77,6 @@ const Detail = () => {
     }
 
     const begin = () => {
-        console.log("for trigger")
         PeriodService.triggerPhase(location.state.mentorId, location.state.id).then();
         window.location.reload()
     }
@@ -91,11 +84,9 @@ const Detail = () => {
     function phaseComment  (id) {
         RateService.doesExist(id, location.state.id).then(
             (res) => {
-                //setShowRatingArea(res.data)
                 return res.data;
             }
         )
-        //return showRatingArea;
     }
 
     const ratePhase = (phase) => {
@@ -108,19 +99,10 @@ const Detail = () => {
     }
 
     const getComments = (id) => {
-        /*RateService.getRates(id).then(
-            (res) => {setComments(res.data)}
-        );
-        console.log(comments)*/
-
         history.push('/comments', id)
-        //setShowRatingArea(!showRatingArea)
     }
 
-    //console.log(period)
-    //console.log(showRatingArea)
     return (
-        //period.startDate.substring(0, 10) {period.startDate.substring(0, 10)}
         <div>
             <div style={{ width: '70%', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <p className="p-m-0" style={{lineHeight: '1.5'}}>

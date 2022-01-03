@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import AuthService from "../services/AuthService";
-import AdminPanel from "./AdminPanel";
-import UserPanel from "./UserPanel";
+import AdminPanel from "./Admin/AdminPanel";
+import UserPanel from "./User/UserPanel";
 import PrimarySearchAppBar from "./PrimarySearchAppBar";
 
 const Dashboard = () => {

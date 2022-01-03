@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Dropdown} from "primereact/dropdown";
 import {Button} from "primereact/button";
-import TopicService from "../services/TopicService";
+import TopicService from "../../services/TopicService";
 
 const DeleteTopic = () => {
     const [error, setError] = useState(null);
@@ -24,7 +24,6 @@ const DeleteTopic = () => {
 
     const deleteThis = () => {
         TopicService.deleteTopic(selectedMainTopic).then();
-        window.location.reload()
     }
 
     return (

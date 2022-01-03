@@ -5,13 +5,11 @@ import Dashboard from "./components/Dashboard"
 import { Switch, Route, Link } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
 import AuthService from "./services/AuthService";
-import Dropdown from "react-bootstrap/Dropdown";
-import {IoLogOutOutline} from "react-icons/io5";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Detail from "./components/Detail";
-import Planning from "./components/Planning";
-import Rate from "./components/Rate";
-import CommentsPage from "./components/CommentsPage";
+import Detail from "./components/User/Detail";
+import Planning from "./components/User/Planning";
+import Rate from "./components/User/Rate";
+import CommentsPage from "./components/User/CommentsPage";
 
 class App extends Component {
     constructor(props) {
@@ -19,8 +17,6 @@ class App extends Component {
         this.logOut = this.logOut.bind(this);
 
         this.state = {
-            showUserBoard: false,
-            showAdminBoard: false,
             currentUser: undefined,
         };
     }
@@ -42,34 +38,10 @@ class App extends Component {
 
 
     render() {
-        const { currentUser, showAdminBoard } = this.state;
+
 
         return (
             <div className="container">
-                {/*<nav className="navbar navbar-expand navbar-dark" style={{paddingBottom:-3}}>
-                    {currentUser ? (
-                        <div className="navbar-nav ml-auto">
-                            <Dropdown>
-                                <Dropdown.Toggle variant="None" style={{color:"black"}} >
-                                    {currentUser.username}
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item href="/login" onClick={this.logOut} style={{color:"#004FB1"}}>
-                                        Çıkış Yap <IoLogOutOutline size={18} style={{marginBottom:3,marginRight:5}}/>
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </div>
-                    ) :  (
-                        <div className="navbar-nav ml-auto">
-                            <li className="nav-item" >
-                                <Link to={"/login"} className="nav-link" style={{color:"black"}}>
-                                    LOGIN
-                                </Link>
-                            </li>
-                        </div>
-                    )}
-                </nav>*/}
 
                 <div style={{marginTop:40,marginLeft:20,marginRight:20,color:"black"}}>
                     <Switch>

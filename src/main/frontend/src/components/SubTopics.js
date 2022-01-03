@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
-import TagFacesIcon from '@material-ui/icons/TagFaces';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,20 +18,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SubTopics({myArray, mainTopic}) {
-    console.log(myArray.val.length);
     const classes = useStyles();
     const [chipData, setChipData] = React.useState([
     ]);
 
     function assign  () {
         for (let i = 0; i < myArray.val.length; i++){
-            //setChipData(i,values.val[i])
             let newValue = {key : i, label : myArray.val[i]};
-            //setChipData(chipData => [...chipData, newValue])
-            console.log(myArray.val[i]);
-            console.log(newValue);
             chipData.push(newValue);
-            //chipData.push({key : i, label : {values}[i]})
         }
     }
 

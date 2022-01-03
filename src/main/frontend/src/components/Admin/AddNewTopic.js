@@ -4,12 +4,10 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
-//import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import SubTopics from "./SubTopics";
-import Chip from "@material-ui/core/Chip";
-import TopicService from "../services/TopicService";
+import SubTopics from "../SubTopics";
+import TopicService from "../../services/TopicService";
 import AddIcon from '@material-ui/icons/Add';
 import { InputText } from 'primereact/inputtext';
 import {Button} from "primereact/button";
@@ -71,7 +69,6 @@ export default function AddNewTopic() {
     const steps = getSteps();
     const [text, setText] = useState('')
     const [values, setValues] = useState({ val: []});
-    //const [chipData, setChipData] = React.useState([]);
 
     const handleFinish = () => {
         TopicService.createTopic(text, values.val).then();
@@ -103,7 +100,7 @@ export default function AddNewTopic() {
             </div>
         );
     };
-    //<Button icon="pi pi-minus" className="p-button-danger p-button-rounded p-mr-2" value='remove' onClick={removeClick.bind(i)} />
+
     function dynamicInput() {
 
         function createInputs() {
@@ -127,7 +124,6 @@ export default function AddNewTopic() {
 
         const addClick = () => {
             setValues({ val: [...values.val, '']});
-            //return <SubTopics myArray={values}/>
         }
 
         const removeClick = () => {
@@ -136,12 +132,6 @@ export default function AddNewTopic() {
             setValues({ val: vals });
         }
 
-        const handleSubmit = event => {
-            //alert('A name was submitted: ' + values.val.join(', '));
-            //event.preventDefault();
-        }
-        //Button icon="pi pi-plus" className="p-button-help p-button-rounded p-mr-2"
-        //<Button icon="pi pi-plus" className="p-button-help p-button-rounded p-mr-2"  onClick={addClick} />
         return (
             <form>
                 {createInputs()}
@@ -150,17 +140,6 @@ export default function AddNewTopic() {
                 >
                     <AddIcon />
                 </IconButton>
-                {/*{chipData.map((data) => {
-
-                    return (
-                        <li key={data.key}>
-                            <Chip
-                                label={data.label}
-                                className={classes.chip}
-                            />
-                        </li>
-                    );
-                })}*/}
             </form>
         );
 

@@ -5,13 +5,12 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
 import { v4 as uuidv4 } from 'uuid';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {Calendar} from "primereact/calendar";
 import {useHistory, useLocation} from "react-router-dom";
-import PeriodService from "../services/PeriodService";
+import PeriodService from "../../services/PeriodService";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -74,13 +73,6 @@ const Planning = () => {
                             value={inputField.phaseName}
                             onChange={event => handleChangeInput(inputField.id, event)}
                         />
-                        {/*<TextField
-                            name="lastName"
-                            label="Last Name"
-                            variant="filled"
-                            value={inputField.lastName}
-                            onChange={event => handleChangeInput(inputField.id, event)}
-                        />*/}
                         <Calendar id="icon"
                                   name="endDate"
                                   value={inputField.endDate}

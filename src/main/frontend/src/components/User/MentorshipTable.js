@@ -9,11 +9,11 @@ import {Ripple} from 'primereact/ripple';
 import {Dropdown} from 'primereact/dropdown';
 import {InputText} from 'primereact/inputtext';
 import {classNames} from 'primereact/utils';
-import MentorService from "../services/MentorService";
-import AuthService from "../services/AuthService";
-import MenteeService from "../services/MenteeService";
+import MentorService from "../../services/MentorService";
+import AuthService from "../../services/AuthService";
+import MenteeService from "../../services/MenteeService";
 import {useHistory, withRouter} from "react-router-dom";
-import PeriodService from "../services/PeriodService";
+import PeriodService from "../../services/PeriodService";
 
 
 const MentorshipTable = ({title, desc, user, who}) => {
@@ -54,16 +54,15 @@ const MentorshipTable = ({title, desc, user, who}) => {
     }
 
     useEffect(() => {
-        console.log("sorun?")
         MentorService.getMentees(currentUser.username).then(
             (res) => {setMentees(res.data)
-                console.log(res.data)}
+                }
         );
-        console.log(mentees);
+
         MenteeService.getMentors(currentUser.username).then(
             (res) => {setMentors(res.data)}
         );
-        console.log(mentors);
+
     }, [user]);
 
 
@@ -120,11 +119,11 @@ const MentorshipTable = ({title, desc, user, who}) => {
     };
 
     const mentorshipInfo = (mentorship) => {
-        console.log(mentorship)
+
         PeriodService.getPeriod(mentorship.mentorId, mentorship.id).then(
             (res) => {setPeriod(res.data)}
         );
-        console.log(period)
+
 
         if ( who === "mentor"){
             let myId = mentorship.mentorId;
@@ -144,8 +143,7 @@ const MentorshipTable = ({title, desc, user, who}) => {
 
 
     const actionBodyTemplate = (rowData) => {
-        console.log(rowData)
-        //icon="pi pi-pencil"
+
         return (
             <React.Fragment>
                 <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={() => mentorshipInfo(rowData)} />
@@ -160,7 +158,7 @@ const MentorshipTable = ({title, desc, user, who}) => {
         PeriodService.getPeriodName(rowData.mentorId, rowData.id).then(
             (res) => setPer(res.data)
         );
-        console.log(per)
+
 
         return (
             <React.Fragment>

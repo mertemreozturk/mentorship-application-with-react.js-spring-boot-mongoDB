@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import MenteeService from "../services/MenteeService";
-import AuthService from "../services/AuthService";
+import MenteeService from "../../../services/MenteeService";
+import AuthService from "../../../services/AuthService";
 import { Button } from 'primereact/button';
-import MentorService from "../services/MentorService";
+import MentorService from "../../../services/MentorService";
 
 const MentorTablePage  = ({data, where}) => {
     const [nodes, setNodes] = useState([]);
     const currentUser = AuthService.getCurrentUser();
+    const [flag, setFlag] = useState(false)
 
     useEffect( () => {
-        console.log("table"+data)
+        process(data);
+    }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const process = (arr) => {
         let files = [];
-        for (let i = 0; i < data.length; i++) {
+        for (let i = 0; i < arr.length; i++) {
             let node = {
                 key: i,
                 data: {
-                    name: data[i].username,
-                    email: data[i].email,
-                    topic: data[i].topic
+                    name: arr[i].username,
+                    email: arr[i].email,
+                    topic: arr[i].topic
                 },
                 children: [
                     {
@@ -28,20 +32,20 @@ const MentorTablePage  = ({data, where}) => {
                             name:
                                 where === "search" ?
                                     (<Button label="Mentor seç" icon="pi pi-check" className="p-button-success p-button-rounded p-mr-2"
-                                        onClick={() => acceptMentor(data[i].topic, data[i].subtopics, data[i].id)}/>
+                                             onClick={() => acceptMentor(arr[i].topic, arr[i].subtopics, arr[i].id)}/>
                                     )
                                     : ( <view>
-                                            <view>
-                                                <Button label="Kabul et" icon="pi pi-check" className="p-button-success p-button-rounded p-mr-2"
-                                                    onClick={() => acceptApply(data[i].id)}/>
-                                            </view>
-                                            <view>
-                                                <Button label="Reddet" icon="pi pi-times" className="p-button-danger p-button-rounded p-mr-5"
-                                                    onClick={() => rejectApply(data[i].id)}/>
-                                            </view>
-                                        </view>),
-                            email: data[i].about,
-                            topic: data[i].subtopics.toString()
+                                        <view>
+                                            <Button label="Kabul et" icon="pi pi-check" className="p-button-success p-button-rounded p-mr-2"
+                                                    onClick={() => acceptApply(arr[i].id)}/>
+                                        </view>
+                                        <view>
+                                            <Button label="Reddet" icon="pi pi-times" className="p-button-danger p-button-rounded p-mr-5"
+                                                    onClick={() => rejectApply(arr[i].id)}/>
+                                        </view>
+                                    </view>),
+                            email: arr[i].about,
+                            topic: arr[i].subtopics.toString()
                         }
                     }
                 ]
@@ -51,22 +55,39 @@ const MentorTablePage  = ({data, where}) => {
         }
 
         setNodes(files);
-    }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+    }
+
+    const takeApply = () => {
+        MentorService.getApplies().then(
+            (response) =>{
+                process(response.data);
+            }
+        )
+    }
 
     const acceptMentor =(topic, subtopics, mentorId) =>{
-        console.log(currentUser.username+"burda"+ topic +subtopics +mentorId);
-        MenteeService.addMentee(currentUser.username, topic, subtopics, mentorId).then();
+        MenteeService.addMentee(currentUser.username, topic, subtopics, mentorId).then(
+            (response) => {
+            }
+        );
 
     }
 
     const acceptApply = (mentorId) => {
-        MentorService.acceptApply(mentorId).then();
-        window.location.reload()
+        MentorService.acceptApply(mentorId).then(
+            (response) => {
+                takeApply();
+            }
+        );
+
     }
 
     const rejectApply = (mentorId) => {
-        MentorService.rejectApply(mentorId).then();
-        window.location.reload()
+        MentorService.rejectApply(mentorId).then(
+            (response) => {
+                takeApply();
+            }
+        );
     }
 
     return (

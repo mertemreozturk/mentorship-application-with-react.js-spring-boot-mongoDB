@@ -10,8 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import SearchIcon from '@material-ui/icons/Search';
 import BarChartIcon from '@material-ui/icons/BarChart';
-import MakeApplication from './MakeApplication'
-import SearchMentor from "./SearchMentor";
+import MakeApplication from './Mentor/MakeApplication'
+import SearchMentor from "./Mentee/SearchMentor";
 import Process from "./Process";
 
 function TabPanel(props) {
@@ -58,30 +58,6 @@ const useStyles = makeStyles((theme) => ({
 const UserPanel =() => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-    //const currentUser = AuthService.getCurrentUser();
-    //const [userInfo, setUserInfo] = useState('')
-
-    /*useEffect(  () =>{
-        await fetch("http://localhost:8080/api/user/getUserInfo",{username: currentUser.username})
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result);
-                    setMainTopics(result);
-                },
-                (error) => {
-                    setError(error);
-                }
-            )
-        UserService.getUserInfo(currentUser.username).then(
-            (res) => {setUserInfo(res.data)}
-        );
-        console.log(userInfo)
-        MentorService.getMentors(userInfo.id).then(
-            (res) => {setMentors(res.data)}
-        );
-        console.log(mentors);
-    },[] )*/
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

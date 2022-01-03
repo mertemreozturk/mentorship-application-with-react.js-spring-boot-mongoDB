@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import MentorTablePage from "./MentorTablePage";
+import MentorTablePage from "../User/Mentee/MentorTablePage";
 
 
 const Applies = () => {

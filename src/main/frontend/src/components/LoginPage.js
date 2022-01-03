@@ -58,7 +58,6 @@ export default class Login extends Component {
             AuthService.login(this.state.username, this.state.password).then(
                 () => {
                     this.props.history.push('/dashboard');
-                    window.location.reload();
                 },
                 error => {
                     const resMessage =
@@ -83,7 +82,6 @@ export default class Login extends Component {
 
     render() {
         const responseGoogle = (response) => {
-            console.log(response);
         }
         return (
             <div className="col-md-12">

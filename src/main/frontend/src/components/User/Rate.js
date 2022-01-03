@@ -4,15 +4,13 @@ import Box from '@material-ui/core/Box';
 import { useLocation, useHistory, withRouter } from "react-router-dom";
 import { Editor } from 'primereact/editor';
 import {Button} from "primereact/button";
-import RateService from "../services/RateService";
+import RateService from "../../services/RateService";
 
 const Rate = () => {
     const location = useLocation();
     const [value, setValue] = React.useState(1);
     const [text, setText] = useState('')
     const history = useHistory()
-    console.log(location.state[0])
-    console.log(location.state[1])
     const submit = () => {
 
         RateService.createRate(location.state[0].id, location.state[1], location.state[2],

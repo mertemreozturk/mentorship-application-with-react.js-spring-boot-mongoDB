@@ -64,9 +64,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler)
                 .and()
-                .authorizeRequests().antMatchers("/api/mentor/admin/**")
-                .hasRole("MANAGERS")
-                //.antMatchers("/api/**").permitAll()
+                .authorizeRequests()
+                //.authorizeRequests().antMatchers("/api/mentor/admin/**")
+                //.hasRole("MANAGERS")
+                .antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated();
 
     }

@@ -55,13 +55,13 @@ public class MentorController {
         return ResponseEntity.ok(mentees);
     }
 
-    @PreAuthorize("hasRole('ROLE_MANAGERS')")
-    @GetMapping("/admin/allApplies")
+    //@PreAuthorize("hasRole('ROLE_MANAGERS')")
+    @GetMapping("/allApplies")
     public ResponseEntity<List<Mentor>> getAllApplies(){
         return ResponseEntity.ok(mentorRepository.findByIsAccepted(false));
     }
 
-    @PreAuthorize("hasRole('ROLE_MANAGERS')")
+    //@PreAuthorize("hasRole('ROLE_MANAGERS')")
     @PutMapping("/accept/{id}")
     public ResponseEntity<Mentor> accept(@PathVariable String id){
         Mentor mentor = mentorRepository.findById(id).get();
@@ -69,7 +69,7 @@ public class MentorController {
         return ResponseEntity.ok(mentorRepository.save(mentor));
     }
 
-    @PreAuthorize("hasRole('ROLE_MANAGERS')")
+    //@PreAuthorize("hasRole('ROLE_MANAGERS')")
     @DeleteMapping("/reject/{id}")
     public ResponseEntity<?> reject(@PathVariable String id){
         Mentor mentor = mentorRepository.findById(id).get();

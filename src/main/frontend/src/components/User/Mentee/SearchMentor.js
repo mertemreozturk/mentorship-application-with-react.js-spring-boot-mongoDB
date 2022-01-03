@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import TextField from '@material-ui/core/TextField';
-import MentorService from "../services/MentorService";
+import MentorService from "../../../services/MentorService";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Dropdown} from "primereact/dropdown";
-import TopicService from "../services/TopicService";
+import TopicService from "../../../services/TopicService";
 import {MultiSelect} from "primereact/multiselect";
 import Button from "@material-ui/core/Button";
 import MentorTablePage from "./MentorTablePage"
@@ -37,8 +37,7 @@ const SearchMentor = () => {
 
     const handleSearchChange = (event) => {
         setSearch(event.target.value)
-        console.log(search);
-        console.log(mentors)
+
     }
 
     useEffect( async () => {
@@ -46,7 +45,6 @@ const SearchMentor = () => {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
                     setMainTopics(result);
                 },
                 (error) => {
@@ -57,7 +55,6 @@ const SearchMentor = () => {
     }, []);
 
     useEffect( () => {
-        console.log(search);
         setMentors([])
         MentorService.findMentor(search).then((res) => {
             let arr = [];
@@ -73,7 +70,6 @@ const SearchMentor = () => {
         TopicService.getSubTopics(selectedMainTopic).then(
             (res) => {setTopics(res.data)}
         );
-        console.log(topics);
     }
 
     const submit = () => {

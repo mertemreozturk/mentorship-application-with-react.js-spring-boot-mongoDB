@@ -34,6 +34,11 @@ class MentorService {
             })
     }
 
+    getApplies(){
+        return axios
+            .get(API_URL + "/allApplies")
+    }
+
     acceptApply(id){
         return axios
             .put(API_URL +"/accept/" + id);

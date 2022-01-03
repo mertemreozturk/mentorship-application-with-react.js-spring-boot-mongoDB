@@ -4,12 +4,11 @@ import 'primereact/resources/primereact.css';
 import { Dropdown } from 'primereact/dropdown';
 import React, { useState, useEffect } from 'react';
 import { MultiSelect } from 'primereact/multiselect';
-import TopicService from "../services/TopicService";
+import TopicService from "../../../services/TopicService";
 import Button from '@material-ui/core/Button';
-import AuthService from "../services/AuthService";
+import AuthService from "../../../services/AuthService";
 import { InputTextarea } from 'primereact/inputtextarea';
-import MentorService from "../services/MentorService";
-import {textAlign} from "@material-ui/system";
+import MentorService from "../../../services/MentorService";
 
 const MakeApplication = () => {
     const currentUser = AuthService.getCurrentUser();
@@ -20,24 +19,13 @@ const MakeApplication = () => {
     const [mainTopics, setMainTopics] = useState(null);
     const [topics, setTopics] = useState([]);
     const [about, setAbout] = useState('');
-    const [numberOfPhases, setNumberOfPhases] = useState('');
 
-    //const phases = [1, 2 , 3, 4, 5];
-
-    /*const topics = [
-         'New York' ,
-         'Rome' ,
-         'London',
-         'Istanbul' ,
-         'Paris'
-    ];*/
 
     useEffect( async () => {
         await fetch("http://localhost:8080/api/topic/getAllTopics")
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
                     setMainTopics(result);
                 },
                 (error) => {
@@ -51,12 +39,10 @@ const MakeApplication = () => {
         TopicService.getSubTopics(selectedMainTopic).then(
             (res) => {setTopics(res.data)}
         );
-        console.log(topics);
     }
 
     const submit = () => {
         MentorService.createMentor(currentUser.username, selectedMainTopic, selectedTopic, about).then();
-        window.location.reload();
     }
 
     return (

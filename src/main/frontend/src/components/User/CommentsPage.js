@@ -4,7 +4,7 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import Rating from '@material-ui/lab/Rating';
 import {useLocation, useHistory} from "react-router-dom";
-import RateService from "../services/RateService";
+import RateService from "../../services/RateService";
 
 const CommentsPage = () => {
     const [assessment, setAssessments] = useState([]);
@@ -15,7 +15,7 @@ const CommentsPage = () => {
         RateService.getRates(location.state).then(
             (res) => {setAssessments(res.data)}
         )
-        console.log(assessment)
+
     }, []);
 
     const ratingBodyTemplate = (rowData) => {
