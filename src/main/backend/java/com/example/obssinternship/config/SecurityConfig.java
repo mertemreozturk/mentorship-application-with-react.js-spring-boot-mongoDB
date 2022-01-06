@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 .authorizeRequests()
-                //.authorizeRequests().antMatchers("/api/mentor/admin/**")
+                //.antMatchers("/api/mentor/admin/**").hasAnyAuthority("ROLE_MANAGERS")
                 //.hasRole("MANAGERS")
                 .antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated();

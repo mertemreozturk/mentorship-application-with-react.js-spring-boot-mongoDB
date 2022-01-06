@@ -55,8 +55,8 @@ public class MentorController {
         return ResponseEntity.ok(mentees);
     }
 
-    //@PreAuthorize("hasRole('ROLE_MANAGERS')")
-    @GetMapping("/allApplies")
+    @PreAuthorize("hasRole('MANAGERS')")
+    @GetMapping("/admin/allApplies")
     public ResponseEntity<List<Mentor>> getAllApplies(){
         return ResponseEntity.ok(mentorRepository.findByIsAccepted(false));
     }
